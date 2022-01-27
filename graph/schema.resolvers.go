@@ -11,11 +11,23 @@ import (
 	"github.com/siongui/go-graphql-postgresql-todo-example/graph/model"
 )
 
-func (r *mutationResolver) CreateTodo(ctx context.Context, input model.NewTodo) (*model.Todo, error) {
+func (r *mutationResolver) CreateTodo(ctx context.Context, input model.TodoInput) (*model.Todo, error) {
 	panic(fmt.Errorf("not implemented"))
 }
 
-func (r *queryResolver) Todos(ctx context.Context) ([]*model.Todo, error) {
+func (r *mutationResolver) UpdateTodo(ctx context.Context, id int, input model.TodoInput) (*model.Todo, error) {
+	panic(fmt.Errorf("not implemented"))
+}
+
+func (r *queryResolver) GetTodo(ctx context.Context, id int) (*model.Todo, error) {
+	panic(fmt.Errorf("not implemented"))
+}
+
+func (r *queryResolver) TodoPages(ctx context.Context, paginationInput model.PaginationInput) (*model.TodoPagination, error) {
+	panic(fmt.Errorf("not implemented"))
+}
+
+func (r *queryResolver) TodoSearch(ctx context.Context, input model.TodoSearchInput, paginationInput model.PaginationInput) (*model.TodoPagination, error) {
 	panic(fmt.Errorf("not implemented"))
 }
 

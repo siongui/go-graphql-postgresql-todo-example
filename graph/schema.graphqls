@@ -2,27 +2,90 @@
 #
 # https://gqlgen.com/getting-started/
 
+scalar DateTime
+
 type Todo {
-  id: ID!
-  text: String!
-  done: Boolean!
-  user: User!
+    id: Int
+    content_code: String
+    content_name: String
+    description: String
+    start_date: DateTime
+    end_date: DateTime
+    status: String
+    created_by: String
+    created_date: DateTime
+    updated_by: String
+    updated_date: DateTime
 }
 
-type User {
-  id: ID!
-  name: String!
+input TodoInput {
+    content_code: String
+    content_name: String
+    description: String
+    start_date: DateTime
+    end_date: DateTime
+    status: String
+    created_by: String
+    updated_by: String
+}
+
+input TodoSearchInput {
+    content_code: String
+    content_name: String
+    start_date: DateTime
+    end_date: DateTime
+    status: String
+}
+
+input PaginationInput {
+    count: Int! = 10
+    page: Int! = 1
+}
+
+type TodoPagination {
+    PaginationInfo: PaginationInfo!
+    Todos: [Todo!]!
+}
+
+type PaginationInfo {
+    total_count: Int!
+    current_page: Int!
+    total_pages: Int!
 }
 
 type Query {
-  todos: [Todo!]!
-}
+    "Find todo by id"
+    getTodo(
+        "id of the record"
+        id: Int!
+    ): Todo
 
-input NewTodo {
-  text: String!
-  userId: String!
+    "Offset based pagination of todo list"
+    TodoPages(
+        "pagination input"
+        paginationInput: PaginationInput! = {count: 10, page: 1}
+    ): TodoPagination!
+
+    TodoSearch(
+        "search filters"
+        input: TodoSearchInput!,
+
+        "pagination input"
+        paginationInput: PaginationInput! = {count: 10, page: 1}
+    ): TodoPagination!
 }
 
 type Mutation {
-  createTodo(input: NewTodo!): Todo!
+    "create a new todo"
+    createTodo(
+        input: TodoInput!
+    ): Todo
+
+    "update existing todo"
+    updateTodo(
+        "id of the record"
+        id: Int!,
+
+        input: TodoInput!
+    ): Todo
 }

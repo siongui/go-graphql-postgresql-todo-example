@@ -20,6 +20,9 @@ fmt:
 gqlinit:
 	$(GQLGEN) init --verbose
 
+schema_generate:
+	$(GQLGEN) generate --verbose
+
 modinit:
 	go mod init $(PKGNAME)
 
