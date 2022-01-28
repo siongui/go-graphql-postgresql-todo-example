@@ -60,3 +60,28 @@ type TodoService interface {
 	CreateTodo(TodoInput) (Todo, error)
 	UpdateTodo(int, TodoInput) (Todo, error)
 }
+
+type todoService struct{}
+
+func (todoService) GetTodo(id int) (t Todo, err error) {
+	return
+}
+
+func (todoService) TodoPages(pi PaginationInput) (tp TodoPagination, err error) {
+	return
+}
+
+func (todoService) TodoSearch(tsi TodoSearchInput, pi PaginationInput) (tp TodoPagination, err error) {
+	return
+}
+
+func (todoService) CreateTodo(ti TodoInput) (t Todo, err error) {
+	return
+}
+
+func (todoService) UpdateTodo(id int, ti TodoInput) (t Todo, err error) {
+	return
+}
+
+// ServiceMiddleware is a chainable behavior modifier for TodoService.
+type ServiceMiddleware func(TodoService) TodoService
