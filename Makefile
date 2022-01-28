@@ -28,4 +28,4 @@ modinit:
 	go mod init $(PKGNAME)
 
 modtidy:
-	go mod tidy
+	go mod tidy -compat=1.17
