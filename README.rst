@@ -70,7 +70,8 @@ psql_ to connect to the database:
 Code Structure
 ++++++++++++++
 
-- `tools.go <tools.go>`_: Track tool dependencies for a module. See [2]_
+- `tools/tools.go <tools/tools.go>`_: Track tool dependencies for a module.
+  See [2]_
 
 
 Issues

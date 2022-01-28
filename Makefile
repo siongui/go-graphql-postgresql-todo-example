@@ -14,8 +14,8 @@ run:
 	go run server.go
 
 fmt:
-	go fmt server.go
-	go fmt tools.go
+	go fmt *.go
+	go fmt tools/*.go
 
 gqlinit:
 	$(GQLGEN) init --verbose
