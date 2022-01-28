@@ -45,16 +45,18 @@ After git clone this repo, generate and run server:
 PostgreSQL
 ++++++++++
 
+Install Docker_ and `Docker Compose`_
+
 .. code-block:: bash
 
   $ cd /path/to/this/repo/
   $ docker-compose up
 
-psql to connect to the database:
+psql_ to connect to the database:
 
 .. code-block:: bash
 
-  # default password: changeme. can be changed in docker-compose.yml
+  # Default password: changeme. Can be changed in docker-compose.yml
   $ psql -h localhost -p 5432 -U postgres -d todo_db
   Password for user postgres:
   psql (12.9 (Ubuntu 12.9-0ubuntu0.20.04.1), server 14.1)
@@ -68,7 +70,7 @@ psql to connect to the database:
 Code Structure
 ++++++++++++++
 
-`tools.go <tools.go>`_: Track tool dependencies for a module. See [2]_
+- `tools.go <tools.go>`_: Track tool dependencies for a module. See [2]_
 
 
 Issues
@@ -88,18 +90,18 @@ References
 ++++++++++
 
 .. [1] `github.com/99designs/gqlgen <https://github.com/99designs/gqlgen>`_
-
-.. [2] `gqlgen Quick start <https://github.com/99designs/gqlgen#quick-start>`_
-
-       `How can I track tool dependencies for a module? <https://github.com/golang/go/wiki/Modules#how-can-i-track-tool-dependencies-for-a-module>`_
-
+.. [2] | `gqlgen Quick start <https://github.com/99designs/gqlgen#quick-start>`_
+       | `How can I track tool dependencies for a module? <https://github.com/golang/go/wiki/Modules#how-can-i-track-tool-dependencies-for-a-module>`_
 .. [3] `github.com/siongui/go-kit-url-shortener-micro-service <https://github.com/siongui/go-kit-url-shortener-micro-service>`_
-
 .. [4] `Building a GraphQL Server with Go Backend Tutorial | Getting Started <https://www.howtographql.com/graphql-go/1-getting-started/>`_
+.. [5] `How To Remove Docker Images, Containers, and Volumes | DigitalOcean <https://www.digitalocean.com/community/tutorials/how-to-remove-docker-images-containers-and-volumes>`_
 
 .. _Go: https://golang.org/
 .. _GraphQL: https://graphql.org/
 .. _PostgreSQL: https://www.postgresql.org/
 .. _Ubuntu 20.04: https://releases.ubuntu.com/20.04/
 .. _Go 1.17: https://golang.org/dl/
+.. _Docker: https://docs.docker.com/engine/install/
+.. _Docker Compose: https://docs.docker.com/compose/install/
+.. _psql: https://www.postgresguide.com/utilities/psql/
 .. _UNLICENSE: https://unlicense.org/
