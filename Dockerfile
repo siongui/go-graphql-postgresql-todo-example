@@ -11,8 +11,8 @@ COPY go.mod ./
 COPY go.sum ./
 RUN go mod download
 
-COPY server.go ./
-COPY tools.go ./
+COPY *.go ./
+COPY ./tools/ ./tools/
 COPY gqlgen.yml ./
 COPY ./graph/resolver.go ./graph/resolver.go
 COPY ./graph/schema.graphqls ./graph/schema.graphqls
