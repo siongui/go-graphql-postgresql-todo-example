@@ -70,6 +70,7 @@ References
 
        `How can I track tool dependencies for a module? <https://github.com/golang/go/wiki/Modules#how-can-i-track-tool-dependencies-for-a-module>`_
 
+.. [3] `github.com/siongui/go-kit-url-shortener-micro-service <https://github.com/siongui/go-kit-url-shortener-micro-service>`_
 
 .. _Go: https://golang.org/
 .. _GraphQL: https://graphql.org/
