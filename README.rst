@@ -42,6 +42,29 @@ After git clone this repo, generate and run server:
   $ make
 
 
+PostgreSQL
+++++++++++
+
+.. code-block:: bash
+
+  $ cd /path/to/this/repo/
+  $ docker-compose up
+
+psql to connect to the database:
+
+.. code-block:: bash
+
+  # default password: changeme. can be changed in docker-compose.yml
+  $ psql -h localhost -p 5432 -U postgres -d todo_db
+  Password for user postgres:
+  psql (12.9 (Ubuntu 12.9-0ubuntu0.20.04.1), server 14.1)
+  WARNING: psql major version 12, server major version 14.
+           Some psql features might not work.
+  Type "help" for help.
+
+  todo_db=#
+
+
 Code Structure
 ++++++++++++++
 
@@ -71,6 +94,8 @@ References
        `How can I track tool dependencies for a module? <https://github.com/golang/go/wiki/Modules#how-can-i-track-tool-dependencies-for-a-module>`_
 
 .. [3] `github.com/siongui/go-kit-url-shortener-micro-service <https://github.com/siongui/go-kit-url-shortener-micro-service>`_
+
+.. [4] `Building a GraphQL Server with Go Backend Tutorial | Getting Started <https://www.howtographql.com/graphql-go/1-getting-started/>`_
 
 .. _Go: https://golang.org/
 .. _GraphQL: https://graphql.org/
