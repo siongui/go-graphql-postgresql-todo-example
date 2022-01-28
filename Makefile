@@ -11,7 +11,7 @@ PKGNAME=github.com/siongui/go-graphql-postgresql-todo-example
 GQLGEN?=go run github.com/99designs/gqlgen
 ALL_GO_SOURCES=$(shell /bin/sh -c "find *.go | grep -v _test.go")
 
-run:
+run: fmt
 	go run $(ALL_GO_SOURCES)
 
 fmt:
