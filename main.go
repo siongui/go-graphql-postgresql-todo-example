@@ -19,10 +19,20 @@ func main() {
 		port = defaultPort
 	}
 
-	srv := handler.NewDefaultServer(generated.NewExecutableSchema(generated.Config{Resolvers: &graph.Resolver{}}))
+	svc := todoService{}
+
+	graphQLHandler := handler.NewDefaultServer(generated.NewExecutableSchema(generated.Config{
+		Resolvers: &graph.Resolver{
+			GetTodoEndpoint:    makeGetTodoEndpoint(svc),
+			TodoPagesEndpoint:  makeTodoPagesEndpoint(svc),
+			TodoSearchEndpoint: makeTodoSearchEndpoint(svc),
+			CreateTodoEndpoint: makeCreateTodoEndpoint(svc),
+			UpdateTodoEndpoint: makeUpdateTodoEndpoint(svc),
+		},
+	}))
 
 	http.Handle("/", playground.Handler("GraphQL playground", "/query"))
-	http.Handle("/query", srv)
+	http.Handle("/query", graphQLHandler)
 
 	log.Printf("connect to http://localhost:%s/ for GraphQL playground", port)
 	log.Fatal(http.ListenAndServe(":"+port, nil))

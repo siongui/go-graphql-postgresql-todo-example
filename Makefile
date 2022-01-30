@@ -15,8 +15,9 @@ run: fmt
 	go run $(ALL_GO_SOURCES)
 
 fmt:
-	go fmt *.go
-	go fmt tools/*.go
+	@go fmt *.go
+	@go fmt tools/*.go
+	@go fmt graph/*.go
 
 gqlinit:
 	$(GQLGEN) init --verbose

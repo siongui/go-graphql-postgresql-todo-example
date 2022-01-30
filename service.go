@@ -1,85 +1,41 @@
 package main
 
 import (
-	"time"
+	"github.com/siongui/go-graphql-postgresql-todo-example/graph/model"
 )
 
-type PaginationInput struct {
-	Count int
-	Page  int
-}
-
-type TodoSearchInput struct {
-	ContentCode *string
-	ContentName *string
-	StartDate   *time.Time
-	EndDate     *time.Time
-	Status      *string
-}
-
-type TodoInput struct {
-	ContentCode *string
-	ContentName *string
-	Description *string
-	StartDate   *time.Time
-	EndDate     *time.Time
-	Status      *string
-	CreatedBy   *string
-	UpdatedBy   *string
-}
-
-type PaginationInfo struct {
-	TotalCount  int
-	CurrentPage int
-	TotalPages  int
-}
-
-type TodoPagination struct {
-	PaginationInfo PaginationInfo
-	Todos          []Todo
-}
-
-type Todo struct {
-	Id          int
-	ContentCode string
-	ContentName string
-	Description string
-	StartDate   time.Time
-	EndDate     time.Time
-	Status      string
-	CreatedBy   string
-	CreatedDate time.Time
-	UpdatedBy   string
-	UpdatedDate time.Time
-}
-
 type TodoService interface {
-	GetTodo(int) (Todo, error)
-	TodoPages(PaginationInput) (TodoPagination, error)
-	TodoSearch(TodoSearchInput, PaginationInput) (TodoPagination, error)
-	CreateTodo(TodoInput) (Todo, error)
-	UpdateTodo(int, TodoInput) (Todo, error)
+	GetTodo(int) (*model.Todo, error)
+	TodoPages(model.PaginationInput) (*model.TodoPagination, error)
+	TodoSearch(model.TodoSearchInput, model.PaginationInput) (*model.TodoPagination, error)
+	CreateTodo(model.TodoInput) (*model.Todo, error)
+	UpdateTodo(int, model.TodoInput) (*model.Todo, error)
 }
 
 type todoService struct{}
 
-func (todoService) GetTodo(id int) (t Todo, err error) {
+func (todoService) GetTodo(id int) (t *model.Todo, err error) {
+	t = &model.Todo{}
 	return
 }
 
-func (todoService) TodoPages(pi PaginationInput) (tp TodoPagination, err error) {
+func (todoService) TodoPages(pi model.PaginationInput) (tp *model.TodoPagination, err error) {
+	tp = &model.TodoPagination{}
 	return
 }
 
-func (todoService) TodoSearch(tsi TodoSearchInput, pi PaginationInput) (tp TodoPagination, err error) {
+func (todoService) TodoSearch(tsi model.TodoSearchInput, pi model.PaginationInput) (tp *model.TodoPagination, err error) {
+	tp = &model.TodoPagination{}
 	return
 }
 
-func (todoService) CreateTodo(ti TodoInput) (t Todo, err error) {
+func (todoService) CreateTodo(ti model.TodoInput) (t *model.Todo, err error) {
+	t = &model.Todo{}
 	return
 }
 
-func (todoService) UpdateTodo(id int, ti TodoInput) (t Todo, err error) {
+func (todoService) UpdateTodo(id int, ti model.TodoInput) (t *model.Todo, err error) {
+	t = &model.Todo{}
 	return
 }
 

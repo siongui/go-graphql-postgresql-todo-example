@@ -96,6 +96,9 @@ References
 .. [3] `github.com/siongui/go-kit-url-shortener-micro-service <https://github.com/siongui/go-kit-url-shortener-micro-service>`_
 .. [4] `Building a GraphQL Server with Go Backend Tutorial | Getting Started <https://www.howtographql.com/graphql-go/1-getting-started/>`_
 .. [5] `How To Remove Docker Images, Containers, and Volumes | DigitalOcean <https://www.digitalocean.com/community/tutorials/how-to-remove-docker-images-containers-and-volumes>`_
+.. [6] | `go kit graphql <https://www.google.com/search?q=go+kit+graphql>`_
+       | `GraphQL support · Issue #636 · go-kit/kit · GitHub <https://github.com/go-kit/kit/issues/636>`_
+       | `Add initial GraphQL support by sagikazarmark · Pull Request #81 · sagikazarmark/modern-go-application · GitHub <https://github.com/sagikazarmark/modern-go-application/pull/81>`_
 
 .. _Go: https://golang.org/
 .. _GraphQL: https://graphql.org/

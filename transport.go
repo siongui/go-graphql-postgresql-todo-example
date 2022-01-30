@@ -4,6 +4,8 @@ import (
 	"context"
 
 	"github.com/go-kit/kit/endpoint"
+	"github.com/siongui/go-graphql-postgresql-todo-example/graph"
+	"github.com/siongui/go-graphql-postgresql-todo-example/graph/model"
 )
 
 func makeGetTodoEndpoint(svc TodoService) endpoint.Endpoint {
@@ -15,36 +17,26 @@ func makeGetTodoEndpoint(svc TodoService) endpoint.Endpoint {
 
 func makeTodoPagesEndpoint(svc TodoService) endpoint.Endpoint {
 	return func(ctx context.Context, request interface{}) (interface{}, error) {
-		return svc.TodoPages(request.(PaginationInput))
+		return svc.TodoPages(request.(model.PaginationInput))
 	}
 }
 
 func makeTodoSearchEndpoint(svc TodoService) endpoint.Endpoint {
 	return func(ctx context.Context, request interface{}) (interface{}, error) {
-		req := request.(todoSearchRequest)
+		req := request.(graph.TodoSearchRequest)
 		return svc.TodoSearch(req.T, req.P)
 	}
 }
 
 func makeCreateTodoEndpoint(svc TodoService) endpoint.Endpoint {
 	return func(ctx context.Context, request interface{}) (interface{}, error) {
-		return svc.CreateTodo(request.(TodoInput))
+		return svc.CreateTodo(request.(model.TodoInput))
 	}
 }
 
 func makeUpdateTodoEndpoint(svc TodoService) endpoint.Endpoint {
 	return func(ctx context.Context, request interface{}) (interface{}, error) {
-		req := request.(updateTodoRequest)
+		req := request.(graph.UpdateTodoRequest)
 		return svc.UpdateTodo(req.Id, req.T)
 	}
-}
-
-type todoSearchRequest struct {
-	T TodoSearchInput
-	P PaginationInput
-}
-
-type updateTodoRequest struct {
-	Id int
-	T  TodoInput
 }

@@ -5,30 +5,34 @@ package graph
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/siongui/go-graphql-postgresql-todo-example/graph/generated"
 	"github.com/siongui/go-graphql-postgresql-todo-example/graph/model"
 )
 
 func (r *mutationResolver) CreateTodo(ctx context.Context, input model.TodoInput) (*model.Todo, error) {
-	panic(fmt.Errorf("not implemented"))
+	t, err := r.CreateTodoEndpoint(ctx, input)
+	return t.(*model.Todo), err
 }
 
 func (r *mutationResolver) UpdateTodo(ctx context.Context, id int, input model.TodoInput) (*model.Todo, error) {
-	panic(fmt.Errorf("not implemented"))
+	t, err := r.UpdateTodoEndpoint(ctx, UpdateTodoRequest{Id: id, T: input})
+	return t.(*model.Todo), err
 }
 
 func (r *queryResolver) GetTodo(ctx context.Context, id int) (*model.Todo, error) {
-	panic(fmt.Errorf("not implemented"))
+	t, err := r.GetTodoEndpoint(ctx, id)
+	return t.(*model.Todo), err
 }
 
 func (r *queryResolver) TodoPages(ctx context.Context, paginationInput model.PaginationInput) (*model.TodoPagination, error) {
-	panic(fmt.Errorf("not implemented"))
+	t, err := r.TodoPagesEndpoint(ctx, paginationInput)
+	return t.(*model.TodoPagination), err
 }
 
 func (r *queryResolver) TodoSearch(ctx context.Context, input model.TodoSearchInput, paginationInput model.PaginationInput) (*model.TodoPagination, error) {
-	panic(fmt.Errorf("not implemented"))
+	t, err := r.TodoSearchEndpoint(ctx, TodoSearchRequest{T: input, P: paginationInput})
+	return t.(*model.TodoPagination), err
 }
 
 // Mutation returns generated.MutationResolver implementation.
