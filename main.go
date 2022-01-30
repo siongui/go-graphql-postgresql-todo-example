@@ -35,7 +35,9 @@ func main() {
 
 	logger := log.NewLogfmtLogger(os.Stderr)
 
-	svc := todoService{}
+	var svc TodoService
+	svc = todoService{}
+	svc = loggingMiddleware{logger, svc}
 
 	var getTodoEndpoint endpoint.Endpoint
 	getTodoEndpoint = makeGetTodoEndpoint(svc)
