@@ -18,7 +18,7 @@ Go GraphQL PostgreSQL Todo Example
    :target: https://github.com/siongui/go-graphql-postgresql-todo-example/blob/master/UNLICENSE
 
 
-GraphQL_ + PostgreSQL Todo example for Go_.
+`Go kit`_ + GraphQL_ + PostgreSQL_ Todo example for Go_.
 
 Development Environment:
 
@@ -67,6 +67,19 @@ psql_ to connect to the database:
   todo_db=#
 
 
+GraphQL Example
++++++++++++++++
+
+.. code-block:: graphql
+
+  {
+    getTodo(id: 1) {
+      content_code
+      content_name
+    }
+  }
+
+
 Code Structure
 ++++++++++++++
 
@@ -101,6 +114,7 @@ References
        | `Add initial GraphQL support by sagikazarmark · Pull Request #81 · sagikazarmark/modern-go-application · GitHub <https://github.com/sagikazarmark/modern-go-application/pull/81>`_
 
 .. _Go: https://golang.org/
+.. _Go kit: https://gokit.io/
 .. _GraphQL: https://graphql.org/
 .. _PostgreSQL: https://www.postgresql.org/
 .. _Ubuntu 20.04: https://releases.ubuntu.com/20.04/
