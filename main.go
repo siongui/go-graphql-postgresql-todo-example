@@ -17,7 +17,7 @@ const defaultPort = "8080"
 
 type Middleware func(endpoint.Endpoint) endpoint.Endpoint
 
-func loggingMiddleware(logger log.Logger) Middleware {
+func transportLoggingMiddleware(logger log.Logger) Middleware {
 	return func(next endpoint.Endpoint) endpoint.Endpoint {
 		return func(ctx context.Context, request interface{}) (interface{}, error) {
 			logger.Log("msg", "calling endpoint")
@@ -39,23 +39,23 @@ func main() {
 
 	var getTodoEndpoint endpoint.Endpoint
 	getTodoEndpoint = makeGetTodoEndpoint(svc)
-	getTodoEndpoint = loggingMiddleware(log.With(logger, "method", "getTodo"))(getTodoEndpoint)
+	getTodoEndpoint = transportLoggingMiddleware(log.With(logger, "method", "getTodo"))(getTodoEndpoint)
 
 	var todoPagesEndpoint endpoint.Endpoint
 	todoPagesEndpoint = makeTodoPagesEndpoint(svc)
-	todoPagesEndpoint = loggingMiddleware(log.With(logger, "method", "TodoPages"))(todoPagesEndpoint)
+	todoPagesEndpoint = transportLoggingMiddleware(log.With(logger, "method", "TodoPages"))(todoPagesEndpoint)
 
 	var todoSearchEndpoint endpoint.Endpoint
 	todoSearchEndpoint = makeTodoSearchEndpoint(svc)
-	todoSearchEndpoint = loggingMiddleware(log.With(logger, "method", "TodoSearch"))(todoSearchEndpoint)
+	todoSearchEndpoint = transportLoggingMiddleware(log.With(logger, "method", "TodoSearch"))(todoSearchEndpoint)
 
 	var createTodoEndpoint endpoint.Endpoint
 	createTodoEndpoint = makeCreateTodoEndpoint(svc)
-	createTodoEndpoint = loggingMiddleware(log.With(logger, "method", "createTodo"))(createTodoEndpoint)
+	createTodoEndpoint = transportLoggingMiddleware(log.With(logger, "method", "createTodo"))(createTodoEndpoint)
 
 	var updateTodoEndpoint endpoint.Endpoint
 	updateTodoEndpoint = makeUpdateTodoEndpoint(svc)
-	updateTodoEndpoint = loggingMiddleware(log.With(logger, "method", "updateTodo"))(updateTodoEndpoint)
+	updateTodoEndpoint = transportLoggingMiddleware(log.With(logger, "method", "updateTodo"))(updateTodoEndpoint)
 
 	graphQLHandler := handler.NewDefaultServer(generated.NewExecutableSchema(generated.Config{
 		Resolvers: &graph.Resolver{
