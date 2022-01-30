@@ -71,8 +71,5 @@ func main() {
 	http.Handle("/query", graphQLHandler)
 
 	logger.Log("msg", "connect to http://localhost:"+port+"/ for GraphQL playground")
-	if err := http.ListenAndServe(":"+port, nil); err != nil {
-		logger.Log("msg", "fail to http.ListenAndServe", "port", port)
-		os.Exit(1)
-	}
+	logger.Log("err", http.ListenAndServe(":"+port, nil))
 }
