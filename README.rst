@@ -25,6 +25,8 @@ Development Environment:
   - `Ubuntu 20.04`_
   - `Go 1.17`_
 
+.. contents:: Table of Contents
+
 
 Usage
 +++++
@@ -83,6 +85,8 @@ GraphQL Example
 Code Structure
 ++++++++++++++
 
+- `graph/ <graph/>`_: GraphQL schema
+- `todo/ <todo/>`_: Go micro service - *todo*
 - `tools/tools.go <tools/tools.go>`_: Track tool dependencies for a module.
   See [2]_
 
