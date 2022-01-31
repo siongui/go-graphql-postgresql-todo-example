@@ -26,6 +26,9 @@ gqlinit:
 schema_generate:
 	$(GQLGEN) generate --verbose
 
+local_dev_get_metrics:
+	curl http://localhost:8080/metrics
+
 modinit:
 	go mod init $(PKGNAME)
 
