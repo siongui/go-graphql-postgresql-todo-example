@@ -18,6 +18,7 @@ fmt:
 	@go fmt *.go
 	@go fmt tools/*.go
 	@go fmt graph/*.go
+	@go fmt todo/*.go
 
 gqlinit:
 	$(GQLGEN) init --verbose

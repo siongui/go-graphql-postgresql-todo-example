@@ -1,4 +1,4 @@
-package main
+package todo
 
 import (
 	"time"
@@ -12,7 +12,11 @@ type loggingMiddleware struct {
 	next   TodoService
 }
 
-func (mw loggingMiddleware) GetTodo(id int) (t *model.Todo, err error) {
+func NewLoggingMiddleware(logger log.Logger, s TodoService) TodoService {
+	return &loggingMiddleware{logger, s}
+}
+
+func (mw *loggingMiddleware) GetTodo(id int) (t *model.Todo, err error) {
 	defer func(begin time.Time) {
 		_ = mw.logger.Log(
 			"method", "GetTodo",
@@ -27,7 +31,7 @@ func (mw loggingMiddleware) GetTodo(id int) (t *model.Todo, err error) {
 	return
 }
 
-func (mw loggingMiddleware) TodoPages(pi model.PaginationInput) (tp *model.TodoPagination, err error) {
+func (mw *loggingMiddleware) TodoPages(pi model.PaginationInput) (tp *model.TodoPagination, err error) {
 	defer func(begin time.Time) {
 		_ = mw.logger.Log(
 			"method", "TodoPages",
@@ -42,7 +46,7 @@ func (mw loggingMiddleware) TodoPages(pi model.PaginationInput) (tp *model.TodoP
 	return
 }
 
-func (mw loggingMiddleware) TodoSearch(tsi model.TodoSearchInput, pi model.PaginationInput) (tp *model.TodoPagination, err error) {
+func (mw *loggingMiddleware) TodoSearch(tsi model.TodoSearchInput, pi model.PaginationInput) (tp *model.TodoPagination, err error) {
 	defer func(begin time.Time) {
 		_ = mw.logger.Log(
 			"method", "TodoPages",
@@ -58,7 +62,7 @@ func (mw loggingMiddleware) TodoSearch(tsi model.TodoSearchInput, pi model.Pagin
 	return
 }
 
-func (mw loggingMiddleware) CreateTodo(ti model.TodoInput) (t *model.Todo, err error) {
+func (mw *loggingMiddleware) CreateTodo(ti model.TodoInput) (t *model.Todo, err error) {
 	defer func(begin time.Time) {
 		_ = mw.logger.Log(
 			"method", "TodoPages",
@@ -73,7 +77,7 @@ func (mw loggingMiddleware) CreateTodo(ti model.TodoInput) (t *model.Todo, err e
 	return
 }
 
-func (mw loggingMiddleware) UpdateTodo(id int, ti model.TodoInput) (t *model.Todo, err error) {
+func (mw *loggingMiddleware) UpdateTodo(id int, ti model.TodoInput) (t *model.Todo, err error) {
 	defer func(begin time.Time) {
 		_ = mw.logger.Log(
 			"method", "TodoPages",

@@ -1,4 +1,4 @@
-package main
+package todo
 
 import (
 	"github.com/siongui/go-graphql-postgresql-todo-example/graph/model"
@@ -14,29 +14,33 @@ type TodoService interface {
 
 type todoService struct{}
 
-func (todoService) GetTodo(id int) (t *model.Todo, err error) {
+func (s *todoService) GetTodo(id int) (t *model.Todo, err error) {
 	t = &model.Todo{}
 	return
 }
 
-func (todoService) TodoPages(pi model.PaginationInput) (tp *model.TodoPagination, err error) {
+func (s *todoService) TodoPages(pi model.PaginationInput) (tp *model.TodoPagination, err error) {
 	tp = &model.TodoPagination{}
 	return
 }
 
-func (todoService) TodoSearch(tsi model.TodoSearchInput, pi model.PaginationInput) (tp *model.TodoPagination, err error) {
+func (s *todoService) TodoSearch(tsi model.TodoSearchInput, pi model.PaginationInput) (tp *model.TodoPagination, err error) {
 	tp = &model.TodoPagination{}
 	return
 }
 
-func (todoService) CreateTodo(ti model.TodoInput) (t *model.Todo, err error) {
+func (s *todoService) CreateTodo(ti model.TodoInput) (t *model.Todo, err error) {
 	t = &model.Todo{}
 	return
 }
 
-func (todoService) UpdateTodo(id int, ti model.TodoInput) (t *model.Todo, err error) {
+func (s *todoService) UpdateTodo(id int, ti model.TodoInput) (t *model.Todo, err error) {
 	t = &model.Todo{}
 	return
+}
+
+func NewService() TodoService {
+	return &todoService{}
 }
 
 // ServiceMiddleware is a chainable behavior modifier for TodoService.
