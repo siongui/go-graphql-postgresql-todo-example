@@ -15,9 +15,7 @@ import (
 
 const defaultPort = "8080"
 
-type Middleware func(endpoint.Endpoint) endpoint.Endpoint
-
-func transportLoggingMiddleware(logger log.Logger) Middleware {
+func transportLoggingMiddleware(logger log.Logger) endpoint.Middleware {
 	return func(next endpoint.Endpoint) endpoint.Endpoint {
 		return func(ctx context.Context, request interface{}) (interface{}, error) {
 			logger.Log("msg", "calling endpoint")
