@@ -36,6 +36,7 @@ func main() {
 	logger.Log("password", config.Config.Database.Postgres.Password)
 	logger.Log("dbname", config.Config.Database.Postgres.Dbname)
 
+	// set up prometheus
 	fieldKeys := []string{"method", "error"}
 	requestCount := kitprometheus.NewCounterFrom(stdprometheus.CounterOpts{
 		Namespace: "my_group",
@@ -50,6 +51,7 @@ func main() {
 		Help:      "Total duration of requests in microseconds.",
 	}, fieldKeys)
 
+	// set up todo service and middleware
 	var svc todo.TodoService
 	svc = todo.NewService()
 	svc = todo.NewLoggingMiddleware(logger, svc)
