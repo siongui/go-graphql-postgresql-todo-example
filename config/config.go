@@ -6,6 +6,10 @@ import (
 )
 
 var Config = struct {
+	App struct {
+		Port string `default:"3005" env:"APP__PORT"`
+	}
+
 	Database struct {
 		Postgres struct {
 			Host     string `default:"localhost" env:"DATABASE__POSTGRES__HOST"`

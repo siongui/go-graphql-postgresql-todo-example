@@ -14,14 +14,7 @@ import (
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 )
 
-const defaultPort = "8080"
-
 func main() {
-	port := os.Getenv("PORT")
-	if port == "" {
-		port = defaultPort
-	}
-
 	logger := log.NewLogfmtLogger(os.Stderr)
 
 	// Load config
@@ -29,6 +22,8 @@ func main() {
 		logger.Log("err", err.Error())
 		os.Exit(1)
 	}
+	logger.Log("msg", "App config")
+	logger.Log("port", config.Config.App.Port)
 	logger.Log("msg", "Postgres DSN")
 	logger.Log("host", config.Config.Database.Postgres.Host)
 	logger.Log("port", config.Config.Database.Postgres.Port)
@@ -59,6 +54,6 @@ func main() {
 	http.Handle("/query", todo.MakeGraphQLHandler(svc, logger))
 	http.Handle("/metrics", promhttp.Handler())
 
-	logger.Log("msg", "connect to http://localhost:"+port+"/ for GraphQL playground")
-	logger.Log("err", http.ListenAndServe(":"+port, nil))
+	logger.Log("msg", "connect to http://localhost:"+config.Config.App.Port+"/ for GraphQL playground")
+	logger.Log("err", http.ListenAndServe(":"+config.Config.App.Port, nil))
 }
