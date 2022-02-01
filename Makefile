@@ -16,9 +16,10 @@ run: fmt
 
 fmt:
 	@go fmt *.go
-	@go fmt tools/*.go
+	@go fmt config/*.go
 	@go fmt graph/*.go
 	@go fmt todo/*.go
+	@go fmt tools/*.go
 
 gqlinit:
 	$(GQLGEN) init --verbose

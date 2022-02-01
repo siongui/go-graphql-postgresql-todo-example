@@ -10,7 +10,10 @@ require (
 
 require github.com/prometheus/client_golang v1.11.0
 
+require github.com/jinzhu/configor v1.2.1
+
 require (
+	github.com/BurntSushi/toml v0.3.1 // indirect
 	github.com/agnivade/levenshtein v1.1.0 // indirect
 	github.com/beorn7/perks v1.0.1 // indirect
 	github.com/cespare/xxhash/v2 v2.1.2 // indirect

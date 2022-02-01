@@ -12,6 +12,7 @@ COPY go.sum ./
 RUN go mod download
 
 COPY *.go ./
+COPY ./config/ ./config/
 COPY ./todo/ ./todo/
 COPY ./tools/ ./tools/
 COPY gqlgen.yml ./

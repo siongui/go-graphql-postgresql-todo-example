@@ -85,6 +85,7 @@ GraphQL Example
 Code Structure
 ++++++++++++++
 
+- `config/ <config/>`_: application configuration
 - `graph/ <graph/>`_: GraphQL schema
 - `todo/ <todo/>`_: Go micro service - *todo*
 - `tools/tools.go <tools/tools.go>`_: Track tool dependencies for a module.
@@ -116,6 +117,7 @@ References
 .. [6] | `go kit graphql <https://www.google.com/search?q=go+kit+graphql>`_
        | `GraphQL support · Issue #636 · go-kit/kit · GitHub <https://github.com/go-kit/kit/issues/636>`_
        | `Add initial GraphQL support by sagikazarmark · Pull Request #81 · sagikazarmark/modern-go-application · GitHub <https://github.com/sagikazarmark/modern-go-application/pull/81>`_
+.. [7] `jinzhu/configor: Golang Configuration tool that support YAML, JSON, TOML, Shell Environment <https://github.com/jinzhu/configor>`_
 
 .. _Go: https://golang.org/
 .. _Go kit: https://gokit.io/

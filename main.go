@@ -4,12 +4,14 @@ import (
 	"net/http"
 	"os"
 
+	"github.com/siongui/go-graphql-postgresql-todo-example/config"
+	"github.com/siongui/go-graphql-postgresql-todo-example/todo"
+
 	"github.com/99designs/gqlgen/graphql/playground"
 	"github.com/go-kit/kit/log"
 	kitprometheus "github.com/go-kit/kit/metrics/prometheus"
 	stdprometheus "github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
-	"github.com/siongui/go-graphql-postgresql-todo-example/todo"
 )
 
 const defaultPort = "8080"
@@ -21,6 +23,18 @@ func main() {
 	}
 
 	logger := log.NewLogfmtLogger(os.Stderr)
+
+	// Load config
+	if err := config.LoadConfig(logger); err != nil {
+		logger.Log("err", err.Error())
+		os.Exit(1)
+	}
+	logger.Log("msg", "Postgres DSN")
+	logger.Log("host", config.Config.Database.Postgres.Host)
+	logger.Log("port", config.Config.Database.Postgres.Port)
+	logger.Log("user", config.Config.Database.Postgres.User)
+	logger.Log("password", config.Config.Database.Postgres.Password)
+	logger.Log("dbname", config.Config.Database.Postgres.Dbname)
 
 	fieldKeys := []string{"method", "error"}
 	requestCount := kitprometheus.NewCounterFrom(stdprometheus.CounterOpts{
