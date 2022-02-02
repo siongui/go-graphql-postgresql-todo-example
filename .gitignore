@@ -1,5 +1,5 @@
 graph/generated/
 graph/model/*_gen.go
-graph/bin/
-graph/pkg/
-graph/src/
+tools/bin/
+tools/pkg/
+tools/src/

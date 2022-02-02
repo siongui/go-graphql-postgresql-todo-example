@@ -3,7 +3,7 @@ export GOROOT=$(realpath ../go/)
 export PATH := $(GOROOT)/bin:$(PATH)
 endif
 ifndef GOPATH
-export GOPATH=$(realpath ./graph/)
+export GOPATH=$(realpath ./tools/)
 export PATH := $(GOPATH)/bin:$(PATH)
 endif
 

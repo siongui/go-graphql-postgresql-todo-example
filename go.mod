@@ -5,12 +5,10 @@ go 1.17
 require (
 	github.com/99designs/gqlgen v0.16.0
 	github.com/go-kit/kit v0.12.0
-	github.com/vektah/gqlparser/v2 v2.2.0
+	github.com/jinzhu/configor v1.2.1
+	github.com/prometheus/client_golang v1.12.1
+	github.com/vektah/gqlparser/v2 v2.3.1
 )
-
-require github.com/prometheus/client_golang v1.11.0
-
-require github.com/jinzhu/configor v1.2.1
 
 require (
 	github.com/BurntSushi/toml v0.3.1 // indirect
@@ -30,13 +28,13 @@ require (
 	github.com/mitchellh/mapstructure v1.4.2 // indirect
 	github.com/niemeyer/pretty v0.0.0-20200227124842-a10e7caefd8e // indirect
 	github.com/prometheus/client_model v0.2.0 // indirect
-	github.com/prometheus/common v0.30.0 // indirect
+	github.com/prometheus/common v0.32.1 // indirect
 	github.com/prometheus/procfs v0.7.3 // indirect
 	github.com/russross/blackfriday/v2 v2.1.0 // indirect
 	github.com/stretchr/testify v1.7.0 // indirect
 	github.com/urfave/cli/v2 v2.3.0 // indirect
 	golang.org/x/mod v0.4.2 // indirect
-	golang.org/x/sys v0.0.0-20210917161153-d61c044b1678 // indirect
+	golang.org/x/sys v0.0.0-20220114195835-da31bd327af9 // indirect
 	golang.org/x/tools v0.1.5 // indirect
 	golang.org/x/xerrors v0.0.0-20200804184101-5ec99f83aff1 // indirect
 	google.golang.org/protobuf v1.27.1 // indirect
