@@ -82,6 +82,19 @@ GraphQL Example
   }
 
 
+GraphQL schema linter
++++++++++++++++++++++
+
+Use graphql-schema-linter_ for schema linting. See
+`.graphql-schema-linterrc <.graphql-schema-linterrc>`_ for linting config.
+
+To run the linter:
+
+.. code-block:: bash
+
+  $ make graphql_schema_lint
+
+
 Code Structure
 ++++++++++++++
 
@@ -128,4 +141,5 @@ References
 .. _Docker: https://docs.docker.com/engine/install/
 .. _Docker Compose: https://docs.docker.com/compose/install/
 .. _psql: https://www.postgresguide.com/utilities/psql/
+.. _graphql-schema-linter: https://github.com/cjoudrey/graphql-schema-linter
 .. _UNLICENSE: https://unlicense.org/

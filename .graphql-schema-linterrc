@@ -1,0 +1,20 @@
+{
+    "rules": [
+        "arguments-have-descriptions",
+        "defined-types-are-used",
+        "deprecations-have-a-reason",
+        "descriptions-are-capitalized",
+        "enum-values-have-descriptions",
+        "enum-values-sorted-alphabetically",
+        "input-object-fields-sorted-alphabetically",
+        "interface-fields-sorted-alphabetically",
+        "relay-connection-types-spec",
+        "relay-connection-arguments-spec",
+        "types-are-capitalized",
+        "types-have-descriptions"
+    ],
+    "ignore": {
+        "input-object-fields-sorted-alphabetically": ["TodoInput", "TodoSearchInput"]
+    },
+    "schemaPaths": ["graph/*.graphqls"]
+}

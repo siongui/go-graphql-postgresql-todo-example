@@ -32,6 +32,9 @@ gqlinit:
 schema_generate:
 	$(GQLGEN) generate --verbose
 
+graphql_schema_lint:
+	npx graphql-schema-linter
+
 local_dev_get_metrics:
 	curl http://localhost:8080/metrics
 

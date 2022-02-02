@@ -2,8 +2,10 @@
 #
 # https://gqlgen.com/getting-started/
 
+"DateTime ...(desciption to be added)"
 scalar DateTime
 
+"Todo represents one todo item"
 type Todo {
     id: Int
     content_code: String
@@ -18,6 +20,7 @@ type Todo {
     updated_date: DateTime
 }
 
+"TodoInput is used to create or update todo item"
 input TodoInput {
     content_code: String
     content_name: String
@@ -29,6 +32,7 @@ input TodoInput {
     updated_by: String
 }
 
+"TodoSearchInput is used to search todo items in database"
 input TodoSearchInput {
     content_code: String
     content_name: String
@@ -37,22 +41,26 @@ input TodoSearchInput {
     status: String
 }
 
+"PaginationInput ...(desciption to be added)"
 input PaginationInput {
     count: Int! = 10
     page: Int! = 1
 }
 
+"TodoPagination is paginated todo items"
 type TodoPagination {
     PaginationInfo: PaginationInfo!
     Todos: [Todo!]!
 }
 
+"PaginationInfo represents pagination information"
 type PaginationInfo {
     total_count: Int!
     current_page: Int!
     total_pages: Int!
 }
 
+"Query request"
 type Query {
     "Find todo by id"
     getTodo(
@@ -75,17 +83,20 @@ type Query {
     ): TodoPagination!
 }
 
+"Mutation request"
 type Mutation {
-    "create a new todo"
+    "Create a new todo"
     createTodo(
+        "input for creating todo item"
         input: TodoInput!
     ): Todo
 
-    "update existing todo"
+    "Update existing todo"
     updateTodo(
         "id of the record"
         id: Int!,
 
+        "input for updating todo item"
         input: TodoInput!
     ): Todo
 }
