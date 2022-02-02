@@ -82,7 +82,7 @@ GraphQL Example
   }
 
 
-GraphQL schema linter
+GraphQL Schema Linter
 +++++++++++++++++++++
 
 Use graphql-schema-linter_ for schema linting. See
@@ -93,6 +93,59 @@ To run the linter:
 .. code-block:: bash
 
   $ make graphql_schema_lint
+
+
+Database Migrations
++++++++++++++++++++
+
+golang-migrate_ is used to apply database migrations.
+
+To create migrations, install `golang-migrate CLI`_ first.
+
+.. code-block:: bash
+
+  $ cd /path/to/this/repo/
+  $ migrate create -ext sql -dir migrations/ create_todo_table
+  migrations/20220202204515_create_todo_table.up.sql
+  migrations/20220202204515_create_todo_table.down.sql
+
+Edit the ``up.sql`` and ``down.sql`` accordingly. After finish, set
+**POSTGRESQL_URL** to tell migrate CLI where the database is:
+
+.. code-block:: bash
+
+  $ export POSTGRESQL_URL='postgres://postgres:changeme@localhost:5432/todo_db?sslmode=disable'
+
+Now we apply the migrations to the database:
+
+.. code-block:: bash
+
+  $ migrate -database ${POSTGRESQL_URL} -path migrations/ up
+
+Check if the migrations is correctly applied:
+
+.. code-block:: bash
+
+  # Default password: changeme. Can be changed in docker-compose.yml
+  $ psql -h localhost -p 5432 -U postgres -d todo_db
+  Password for user postgres:
+  psql (12.9 (Ubuntu 12.9-0ubuntu0.20.04.1), server 14.1)
+  WARNING: psql major version 12, server major version 14.
+           Some psql features might not work.
+  Type "help" for help.
+
+  todo_db=# \dt+
+                              List of relations
+   Schema |       Name        | Type  |  Owner   |    Size    | Description
+  --------+-------------------+-------+----------+------------+-------------
+   public | schema_migrations | table | postgres | 8192 bytes |
+   public | todos             | table | postgres | 8192 bytes |
+  (2 rows)
+
+  todo_db=# TABLE todos;
+   id | content_code | created_at | updated_at | deleted_at | content_name | description | start_date | end_date | status | created_by | updated_by
+  ----+--------------+------------+------------+------------+--------------+-------------+------------+----------+--------+------------+------------
+  (0 rows)
 
 
 Code Structure
@@ -142,4 +195,6 @@ References
 .. _Docker Compose: https://docs.docker.com/compose/install/
 .. _psql: https://www.postgresguide.com/utilities/psql/
 .. _graphql-schema-linter: https://github.com/cjoudrey/graphql-schema-linter
+.. _golang-migrate: https://github.com/golang-migrate/migrate
+.. _golang-migrate CLI: https://github.com/golang-migrate/migrate/tree/master/cmd/migrate
 .. _UNLICENSE: https://unlicense.org/
