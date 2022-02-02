@@ -40,6 +40,8 @@ After git clone this repo, generate and run server:
   $ go mod download
   # go generate server code
   $ make schema_generate
+  # database migrations
+  $ make database_migrations_local_development
   # Run server
   $ make
 

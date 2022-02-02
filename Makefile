@@ -13,6 +13,7 @@ export PATH := $(GOPATH)/bin:$(PATH)
 endif
 
 PKGNAME=github.com/siongui/go-graphql-postgresql-todo-example
+MIGRATIONS_DIR=$(CURDIR)/migrations/
 GQLGEN?=go run github.com/99designs/gqlgen
 ALL_GO_SOURCES=$(shell /bin/sh -c "find *.go | grep -v _test.go")
 
@@ -25,6 +26,7 @@ fmt:
 	@go fmt graph/*.go
 	@go fmt todo/*.go
 	@go fmt tools/*.go
+	@go fmt tools/migrate/*.go
 
 gqlinit:
 	$(GQLGEN) init --verbose
@@ -34,6 +36,9 @@ schema_generate:
 
 graphql_schema_lint:
 	npx graphql-schema-linter
+
+database_migrations_local_development: fmt
+	go run tools/migrate/main.go -ssl=false -dir=$(MIGRATIONS_DIR)
 
 local_dev_get_metrics:
 	curl http://localhost:8080/metrics
