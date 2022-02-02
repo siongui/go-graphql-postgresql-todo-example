@@ -1,6 +1,11 @@
+# Check if a program exists from a Makefile
+# https://stackoverflow.com/a/34756868
+CMDGO := $(shell command -v go 2> /dev/null)
 ifndef GOROOT
+ifndef CMDGO
 export GOROOT=$(realpath ../go/)
 export PATH := $(GOROOT)/bin:$(PATH)
+endif
 endif
 ifndef GOPATH
 export GOPATH=$(realpath ./tools/)

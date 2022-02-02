@@ -19,9 +19,10 @@ COPY gqlgen.yml ./
 COPY ./graph/resolver.go ./graph/resolver.go
 COPY ./graph/schema.graphqls ./graph/schema.graphqls
 COPY ./graph/schema.resolvers.go ./graph/schema.resolvers.go
+COPY Makefile ./Makefile
 
 RUN apk add build-base
-RUN go run github.com/99designs/gqlgen generate --verbose
+RUN make schema_generate
 RUN go build -o /todo_server
 
 EXPOSE 8080
