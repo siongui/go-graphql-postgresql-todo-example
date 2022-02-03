@@ -25,6 +25,7 @@ fmt:
 	@go fmt config/*.go
 	@go fmt graph/*.go
 	@go fmt todo/*.go
+	@go fmt todo/tododb/*.go
 	@go fmt tools/*.go
 	@go fmt tools/migrate/*.go
 
@@ -42,6 +43,9 @@ database_migrations_local_development: fmt
 
 local_dev_get_metrics:
 	curl http://localhost:8080/metrics
+
+tododb_test:
+	go test -v -race todo/tododb/*.go
 
 modinit:
 	go mod init $(PKGNAME)
