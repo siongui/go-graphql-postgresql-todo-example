@@ -1,10 +1,10 @@
 CREATE TABLE IF NOT EXISTS "todos"
   (
      "id"           BIGSERIAL,
-     "content_code" TEXT NOT NULL UNIQUE,
      "created_at"   TIMESTAMPTZ NOT NULL,
      "updated_at"   TIMESTAMPTZ NOT NULL,
      "deleted_at"   TIMESTAMPTZ,
+     "content_code" TEXT NOT NULL UNIQUE,
      "content_name" TEXT,
      "description"  TEXT,
      "start_date"   TIMESTAMPTZ,
