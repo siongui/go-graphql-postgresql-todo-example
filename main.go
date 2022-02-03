@@ -23,7 +23,7 @@ func main() {
 	}
 
 	// Load config
-	if err := config.LoadConfig(logger); err != nil {
+	if err := config.LoadConfig(); err != nil {
 		logger.Log("err", err.Error())
 		os.Exit(1)
 	}

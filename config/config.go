@@ -1,7 +1,6 @@
 package config
 
 import (
-	"github.com/go-kit/kit/log"
 	"github.com/jinzhu/configor"
 )
 
@@ -21,7 +20,6 @@ var Config = struct {
 	}
 }{}
 
-func LoadConfig(logger log.Logger) error {
-	logger.Log("msg", "Load Application Configuration")
+func LoadConfig() error {
 	return configor.Load(&Config)
 }
