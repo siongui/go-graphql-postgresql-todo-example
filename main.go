@@ -29,6 +29,7 @@ func main() {
 	}
 	logger.Log("msg", "App config")
 	logger.Log("port", config.Config.App.Port)
+	logger.Log("timezone", config.Config.App.Timezone)
 	logger.Log("msg", "Postgres DSN")
 	logger.Log("host", config.Config.Database.Postgres.Host)
 	logger.Log("port", config.Config.Database.Postgres.Port)

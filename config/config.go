@@ -7,6 +7,8 @@ import (
 var Config = struct {
 	App struct {
 		Port string `default:"3005" env:"APP__PORT"`
+		// https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+		Timezone string `default:"Asia/Taipei" env:"APP__TIME_ZONE"`
 	}
 
 	Database struct {
