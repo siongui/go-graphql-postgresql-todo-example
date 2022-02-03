@@ -15,3 +15,5 @@ CREATE TABLE IF NOT EXISTS "todos"
 
      PRIMARY KEY ("id")
   );
+
+CREATE INDEX "idx_todo_deleted_at" ON "todos" ("deleted_at")

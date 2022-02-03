@@ -149,6 +149,33 @@ Check if the migrations is correctly applied:
   ----+--------------+------------+------------+------------+--------------+-------------+------------+----------+--------+------------+------------
   (0 rows)
 
+Migrations with gorm.Model
+--------------------------
+
+gorm_ is ORM library for Go. The migration SQL for gorm.Model_:
+
+.. code-block:: go
+
+  // gorm.Model embedded in MyType
+  type MyType struct {
+  	gorm.Model
+  }
+
+The table name is *my_types*
+
+.. code-block:: sql
+
+  CREATE TABLE "my_types"
+  (
+      "id"         bigserial,
+      "created_at" timestamptz NOT NULL,
+      "updated_at" timestamptz NOT NULL,
+      "deleted_at" timestamptz,
+      PRIMARY KEY ("id")
+  );
+
+  CREATE INDEX "idx_my_type_deleted_at" ON "my_types" ("deleted_at")
+
 
 Code Structure
 ++++++++++++++
@@ -199,4 +226,6 @@ References
 .. _graphql-schema-linter: https://github.com/cjoudrey/graphql-schema-linter
 .. _golang-migrate: https://github.com/golang-migrate/migrate
 .. _golang-migrate CLI: https://github.com/golang-migrate/migrate/tree/master/cmd/migrate
+.. _gorm: https://gorm.io/
+.. _gorm.Model: https://gorm.io/docs/models.html#gorm-Model
 .. _UNLICENSE: https://unlicense.org/
