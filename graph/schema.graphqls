@@ -2,22 +2,31 @@
 #
 # https://gqlgen.com/getting-started/
 
-"DateTime ...(desciption to be added)"
+"DateTime must be valid RFC3339 format"
 scalar DateTime
+
+"TodoStatus represents the status of Todo item"
+enum TodoStatus {
+    "status active"
+    Active
+
+    "status inactive"
+    Inactive
+}
 
 "Todo represents one todo item"
 type Todo {
-    id: Int
-    content_code: String
+    id: Int!
+    content_code: String!
     content_name: String
     description: String
     start_date: DateTime
     end_date: DateTime
-    status: String
+    status: TodoStatus
     created_by: String
-    created_date: DateTime
+    created_date: DateTime!
     updated_by: String
-    updated_date: DateTime
+    updated_date: DateTime!
 }
 
 "TodoInput is used to create or update todo item"
@@ -27,7 +36,7 @@ input TodoInput {
     description: String
     start_date: DateTime
     end_date: DateTime
-    status: String
+    status: TodoStatus
     created_by: String
     updated_by: String
 }
@@ -38,7 +47,7 @@ input TodoSearchInput {
     content_name: String
     start_date: DateTime
     end_date: DateTime
-    status: String
+    status: TodoStatus
 }
 
 "PaginationInput ...(desciption to be added)"

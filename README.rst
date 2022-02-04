@@ -83,6 +83,17 @@ GraphQL Example
     }
   }
 
+.. code-block:: graphql
+
+  mutation {
+    createTodo(input: {content_code: "TD001"}) {
+      id
+      content_code
+      created_date
+      updated_date
+    }
+  }
+
 
 GraphQL Schema Linter
 +++++++++++++++++++++

@@ -30,12 +30,21 @@ func main() {
 	logger.Log("msg", "App config")
 	logger.Log("port", config.Config.App.Port)
 	logger.Log("timezone", config.Config.App.Timezone)
-	logger.Log("msg", "Postgres DSN")
-	logger.Log("host", config.Config.Database.Postgres.Host)
-	logger.Log("port", config.Config.Database.Postgres.Port)
-	logger.Log("user", config.Config.Database.Postgres.User)
-	logger.Log("password", config.Config.Database.Postgres.Password)
-	logger.Log("dbname", config.Config.Database.Postgres.Dbname)
+	/*
+		logger.Log("msg", "Postgres DSN")
+		logger.Log("host", config.Config.Database.Postgres.Host)
+		logger.Log("port", config.Config.Database.Postgres.Port)
+		logger.Log("user", config.Config.Database.Postgres.User)
+		logger.Log("password", config.Config.Database.Postgres.Password)
+		logger.Log("dbname", config.Config.Database.Postgres.Dbname)
+	*/
+	gormdsn := "host=" + config.Config.Database.Postgres.Host +
+		" user=" + config.Config.Database.Postgres.User +
+		" password=" + config.Config.Database.Postgres.Password +
+		" dbname=" + config.Config.Database.Postgres.Dbname +
+		" port=" + config.Config.Database.Postgres.Port +
+		" sslmode=disable TimeZone=" + config.Config.App.Timezone
+	logger.Log("gorm_dsn", gormdsn)
 
 	// set up prometheus
 	fieldKeys := []string{"method", "error"}
@@ -54,7 +63,11 @@ func main() {
 
 	// set up todo service and middleware
 	var svc todo.TodoService
-	svc = todo.NewService()
+	svc, err := todo.NewService(gormdsn)
+	if err != nil {
+		logger.Log("err", err.Error())
+		os.Exit(1)
+	}
 	svc = todo.NewLoggingMiddleware(logger, svc)
 	svc = todo.NewInstrumentingMiddleware(requestCount, requestLatency, svc)
 

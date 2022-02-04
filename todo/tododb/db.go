@@ -40,7 +40,7 @@ func (s *todoStore) Create(t *Todo) (*Todo, error) {
 func NewTodoStore(gormdsn string) (TodoStore, error) {
 	db, err := gorm.Open(postgres.Open(gormdsn), &gorm.Config{})
 	if err != nil {
-		return nil, err
+		return &todoStore{}, err
 	}
 	return &todoStore{db: db}, nil
 }
