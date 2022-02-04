@@ -29,16 +29,24 @@ type Todo {
     updated_date: DateTime!
 }
 
-"TodoInput is used to create or update todo item"
-input TodoInput {
+"CreateTodoInput is used to create todo item"
+input CreateTodoInput {
+    content_code: String!
+    content_name: String!
+    description: String!
+    start_date: DateTime!
+    end_date: DateTime!
+    status: TodoStatus!
+}
+
+"UpdateTodoInput is used to update todo item"
+input UpdateTodoInput {
     content_code: String
     content_name: String
     description: String
     start_date: DateTime
     end_date: DateTime
     status: TodoStatus
-    created_by: String
-    updated_by: String
 }
 
 "TodoSearchInput is used to search todo items in database"
@@ -97,7 +105,7 @@ type Mutation {
     "Create a new todo"
     createTodo(
         "input for creating todo item"
-        input: TodoInput!
+        input: CreateTodoInput!
     ): Todo
 
     "Update existing todo"
@@ -106,6 +114,6 @@ type Mutation {
         id: String!,
 
         "input for updating todo item"
-        input: TodoInput!
+        input: UpdateTodoInput!
     ): Todo
 }

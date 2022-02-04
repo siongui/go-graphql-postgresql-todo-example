@@ -14,7 +14,7 @@
         "types-have-descriptions"
     ],
     "ignore": {
-        "input-object-fields-sorted-alphabetically": ["TodoInput", "TodoSearchInput"]
+        "input-object-fields-sorted-alphabetically": ["CreateTodoInput", "UpdateTodoInput", "TodoSearchInput"]
     },
     "schemaPaths": ["graph/*.graphqls"]
 }

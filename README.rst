@@ -86,7 +86,15 @@ GraphQL Example
 .. code-block:: graphql
 
   mutation {
-    createTodo(input: {content_code: "TD001"}) {
+    createTodo(
+      input: {
+        content_code: "TD001",
+        content_name: "my name",
+        description: "test",
+        start_date: "2022-01-23T14:20:50.52+08:00",
+        end_date: "2022-01-30T14:20:50.52+08:00",
+        status: Active}
+    ) {
       id
       content_code
       created_date

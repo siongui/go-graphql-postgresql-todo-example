@@ -10,12 +10,12 @@ import (
 	"github.com/siongui/go-graphql-postgresql-todo-example/graph/model"
 )
 
-func (r *mutationResolver) CreateTodo(ctx context.Context, input model.TodoInput) (*model.Todo, error) {
+func (r *mutationResolver) CreateTodo(ctx context.Context, input model.CreateTodoInput) (*model.Todo, error) {
 	t, err := r.CreateTodoEndpoint(ctx, input)
 	return t.(*model.Todo), err
 }
 
-func (r *mutationResolver) UpdateTodo(ctx context.Context, id string, input model.TodoInput) (*model.Todo, error) {
+func (r *mutationResolver) UpdateTodo(ctx context.Context, id string, input model.UpdateTodoInput) (*model.Todo, error) {
 	t, err := r.UpdateTodoEndpoint(ctx, UpdateTodoRequest{Id: id, T: input})
 	return t.(*model.Todo), err
 }

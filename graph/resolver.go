@@ -16,7 +16,7 @@ type TodoSearchRequest struct {
 
 type UpdateTodoRequest struct {
 	Id string
-	T  model.TodoInput
+	T  model.UpdateTodoInput
 }
 
 type Resolver struct {

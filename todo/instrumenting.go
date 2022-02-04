@@ -59,7 +59,7 @@ func (mw *instrumentingMiddleware) TodoSearch(tsi model.TodoSearchInput, pi mode
 	return
 }
 
-func (mw *instrumentingMiddleware) CreateTodo(ti model.TodoInput) (t *model.Todo, err error) {
+func (mw *instrumentingMiddleware) CreateTodo(ti model.CreateTodoInput) (t *model.Todo, err error) {
 	defer func(begin time.Time) {
 		lvs := []string{"method", "CreateTodo", "error", fmt.Sprint(err != nil)}
 		mw.requestCount.With(lvs...).Add(1)
@@ -70,7 +70,7 @@ func (mw *instrumentingMiddleware) CreateTodo(ti model.TodoInput) (t *model.Todo
 	return
 }
 
-func (mw *instrumentingMiddleware) UpdateTodo(id string, ti model.TodoInput) (t *model.Todo, err error) {
+func (mw *instrumentingMiddleware) UpdateTodo(id string, ti model.UpdateTodoInput) (t *model.Todo, err error) {
 	defer func(begin time.Time) {
 		lvs := []string{"method", "UpdateTodo", "error", fmt.Sprint(err != nil)}
 		mw.requestCount.With(lvs...).Add(1)
