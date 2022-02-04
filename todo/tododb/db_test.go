@@ -5,9 +5,6 @@ import (
 	"time"
 
 	"github.com/siongui/go-graphql-postgresql-todo-example/config"
-
-	"gorm.io/driver/postgres"
-	"gorm.io/gorm"
 )
 
 func TestCreate(t *testing.T) {
@@ -22,7 +19,7 @@ func TestCreate(t *testing.T) {
 		" dbname=" + config.Config.Database.Postgres.Dbname +
 		" port=" + config.Config.Database.Postgres.Port +
 		" sslmode=disable TimeZone=" + config.Config.App.Timezone
-	db, err := gorm.Open(postgres.Open(gormdsn), &gorm.Config{})
+	store, err := NewTodoStore(gormdsn)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -33,12 +30,9 @@ func TestCreate(t *testing.T) {
 		StartDate:   ted,
 		EndDate:     time.Now(),
 		CreatedBy:   "me"}
-	result := db.Create(&td)
-
-	if result.Error != nil {
-		t.Fatal(result.Error)
+	createdTd, err := store.Create(&td)
+	if err != nil {
+		t.Fatal(err)
 	}
-
-	t.Log(td.ID)
-	t.Log(result.RowsAffected)
+	t.Log(createdTd.ID)
 }

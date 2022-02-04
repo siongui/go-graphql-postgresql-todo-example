@@ -6,6 +6,7 @@ package tododb
 import (
 	"time"
 
+	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
 )
 
@@ -21,4 +22,25 @@ type Todo struct {
 	Status      string
 	CreatedBy   string
 	UpdatedBy   string
+}
+
+type TodoStore interface {
+	Create(t *Todo) (*Todo, error)
+}
+
+type todoStore struct {
+	db *gorm.DB
+}
+
+func (s *todoStore) Create(t *Todo) (*Todo, error) {
+	result := s.db.Create(t)
+	return t, result.Error
+}
+
+func NewTodoStore(gormdsn string) (TodoStore, error) {
+	db, err := gorm.Open(postgres.Open(gormdsn), &gorm.Config{})
+	if err != nil {
+		return nil, err
+	}
+	return &todoStore{db: db}, nil
 }
