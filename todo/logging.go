@@ -62,18 +62,19 @@ func (mw *loggingMiddleware) TodoSearch(tsi model.TodoSearchInput, pi model.Pagi
 	return
 }
 
-func (mw *loggingMiddleware) CreateTodo(ti model.CreateTodoInput) (t *model.Todo, err error) {
+func (mw *loggingMiddleware) CreateTodo(ti model.CreateTodoInput, createdby string) (t *model.Todo, err error) {
 	defer func(begin time.Time) {
 		_ = mw.logger.Log(
 			"method", "TodoPages",
 			"input", ti,
+			"createdby", createdby,
 			"output", *t,
 			"err", err,
 			"took", time.Since(begin),
 		)
 	}(time.Now())
 
-	t, err = mw.next.CreateTodo(ti)
+	t, err = mw.next.CreateTodo(ti, createdby)
 	return
 }
 

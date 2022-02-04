@@ -14,6 +14,11 @@ type TodoSearchRequest struct {
 	P model.PaginationInput
 }
 
+type CreateTodoRequest struct {
+	T         model.CreateTodoInput
+	CreatedBy string
+}
+
 type UpdateTodoRequest struct {
 	Id string
 	T  model.UpdateTodoInput

@@ -30,7 +30,8 @@ func makeTodoSearchEndpoint(svc TodoService) endpoint.Endpoint {
 
 func makeCreateTodoEndpoint(svc TodoService) endpoint.Endpoint {
 	return func(ctx context.Context, request interface{}) (interface{}, error) {
-		return svc.CreateTodo(request.(model.CreateTodoInput))
+		req := request.(graph.CreateTodoRequest)
+		return svc.CreateTodo(req.T, req.CreatedBy)
 	}
 }
 

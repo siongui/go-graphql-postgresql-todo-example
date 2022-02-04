@@ -59,14 +59,14 @@ func (mw *instrumentingMiddleware) TodoSearch(tsi model.TodoSearchInput, pi mode
 	return
 }
 
-func (mw *instrumentingMiddleware) CreateTodo(ti model.CreateTodoInput) (t *model.Todo, err error) {
+func (mw *instrumentingMiddleware) CreateTodo(ti model.CreateTodoInput, createdby string) (t *model.Todo, err error) {
 	defer func(begin time.Time) {
 		lvs := []string{"method", "CreateTodo", "error", fmt.Sprint(err != nil)}
 		mw.requestCount.With(lvs...).Add(1)
 		mw.requestLatency.With(lvs...).Observe(time.Since(begin).Seconds())
 	}(time.Now())
 
-	t, err = mw.next.CreateTodo(ti)
+	t, err = mw.next.CreateTodo(ti, createdby)
 	return
 }
 

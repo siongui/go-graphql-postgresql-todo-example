@@ -12,7 +12,7 @@ type TodoService interface {
 	GetTodo(string) (*model.Todo, error)
 	TodoPages(model.PaginationInput) (*model.TodoPagination, error)
 	TodoSearch(model.TodoSearchInput, model.PaginationInput) (*model.TodoPagination, error)
-	CreateTodo(model.CreateTodoInput) (*model.Todo, error)
+	CreateTodo(model.CreateTodoInput, string) (*model.Todo, error)
 	UpdateTodo(string, model.UpdateTodoInput) (*model.Todo, error)
 }
 
@@ -35,7 +35,7 @@ func (s *todoService) TodoSearch(tsi model.TodoSearchInput, pi model.PaginationI
 	return
 }
 
-func (s *todoService) CreateTodo(ti model.CreateTodoInput) (t *model.Todo, err error) {
+func (s *todoService) CreateTodo(ti model.CreateTodoInput, createdby string) (t *model.Todo, err error) {
 	t = &model.Todo{}
 	td := tododb.Todo{
 		ContentCode: ti.ContentCode,
@@ -54,6 +54,7 @@ func (s *todoService) CreateTodo(ti model.CreateTodoInput) (t *model.Todo, err e
 	}
 	td.EndDate = endDate
 	td.Status = ti.Status.String()
+	td.CreatedBy = createdby
 
 	createdTd, err := s.store.Create(&td)
 	if err != nil {

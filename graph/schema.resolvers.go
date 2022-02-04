@@ -11,7 +11,9 @@ import (
 )
 
 func (r *mutationResolver) CreateTodo(ctx context.Context, input model.CreateTodoInput) (*model.Todo, error) {
-	t, err := r.CreateTodoEndpoint(ctx, input)
+	// TODO: createdby is email address of login user. use fixed value now.
+	createdby := "my@example.com"
+	t, err := r.CreateTodoEndpoint(ctx, CreateTodoRequest{T: input, CreatedBy: createdby})
 	return t.(*model.Todo), err
 }
 
