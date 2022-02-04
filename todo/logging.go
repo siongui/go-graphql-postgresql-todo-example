@@ -1,6 +1,7 @@
 package todo
 
 import (
+	"fmt"
 	"time"
 
 	"github.com/go-kit/kit/log"
@@ -21,7 +22,7 @@ func (mw *loggingMiddleware) GetTodo(id string) (t *model.Todo, err error) {
 		_ = mw.logger.Log(
 			"method", "GetTodo",
 			"input", id,
-			"output", *t,
+			"output", fmt.Sprintf("%#v", t),
 			"err", err,
 			"took", time.Since(begin),
 		)
@@ -35,8 +36,8 @@ func (mw *loggingMiddleware) TodoPages(pi model.PaginationInput) (tp *model.Todo
 	defer func(begin time.Time) {
 		_ = mw.logger.Log(
 			"method", "TodoPages",
-			"input", pi,
-			"output", *tp,
+			"input", fmt.Sprintf("%#v", pi),
+			"output", fmt.Sprintf("%#v", tp),
 			"err", err,
 			"took", time.Since(begin),
 		)
@@ -50,9 +51,9 @@ func (mw *loggingMiddleware) TodoSearch(tsi model.TodoSearchInput, pi model.Pagi
 	defer func(begin time.Time) {
 		_ = mw.logger.Log(
 			"method", "TodoSearch",
-			"input(model.TodoSearchInput)", tsi,
-			"input(model.PaginationInput)", pi,
-			"output", *tp,
+			"input(model.TodoSearchInput)", fmt.Sprintf("%#v", tsi),
+			"input(model.PaginationInput)", fmt.Sprintf("%#v", pi),
+			"output", fmt.Sprintf("%#v", tp),
 			"err", err,
 			"took", time.Since(begin),
 		)
@@ -66,9 +67,10 @@ func (mw *loggingMiddleware) CreateTodo(ti model.CreateTodoInput, createdby stri
 	defer func(begin time.Time) {
 		_ = mw.logger.Log(
 			"method", "CreateTodo",
-			"input", ti,
+			// https://stackoverflow.com/questions/16331063/how-can-i-get-the-string-representation-of-a-struct
+			"input", fmt.Sprintf("%#v", ti),
 			"createdby", createdby,
-			"output", *t,
+			"output", fmt.Sprintf("%#v", t),
 			"err", err,
 			"took", time.Since(begin),
 		)
@@ -83,8 +85,8 @@ func (mw *loggingMiddleware) UpdateTodo(id string, ti model.UpdateTodoInput) (t 
 		_ = mw.logger.Log(
 			"method", "UpdateTodo",
 			"input(id)", id,
-			"input(model.TodoInput)", ti,
-			"output", *t,
+			"input(model.TodoInput)", fmt.Sprintf("%#v", ti),
+			"output", fmt.Sprintf("%#v", t),
 			"err", err,
 			"took", time.Since(begin),
 		)
