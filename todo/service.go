@@ -41,6 +41,8 @@ func (s *todoService) CreateTodo(ti model.CreateTodoInput, createdby string) (t 
 		ContentCode: ti.ContentCode,
 		ContentName: ti.ContentName,
 		Description: ti.Description,
+		Status:      ti.Status.String(),
+		CreatedBy:   createdby,
 	}
 
 	startDate, err := time.Parse(time.RFC3339, ti.StartDate)
@@ -53,20 +55,26 @@ func (s *todoService) CreateTodo(ti model.CreateTodoInput, createdby string) (t 
 		return t, err
 	}
 	td.EndDate = endDate
-	td.Status = ti.Status.String()
-	td.CreatedBy = createdby
 
 	createdTd, err := s.store.Create(&td)
 	if err != nil {
 		return
 	}
 
+	sd := createdTd.StartDate.Format(time.RFC3339)
+	ed := createdTd.EndDate.Format(time.RFC3339)
 	t = &model.Todo{
-		ID:          strconv.FormatUint(uint64(createdTd.ID), 10),
-		ContentCode: createdTd.ContentCode,
+		ID: strconv.FormatUint(uint64(createdTd.ID), 10),
 		//CreatedDate: createdTd.CreatedAt.UTC().Format(time.RFC3339),
 		CreatedDate: createdTd.CreatedAt.Format(time.RFC3339),
 		UpdatedDate: createdTd.UpdatedAt.Format(time.RFC3339),
+		ContentCode: createdTd.ContentCode,
+		ContentName: &createdTd.ContentName,
+		Description: &createdTd.Description,
+		StartDate:   &sd,
+		EndDate:     &ed,
+		Status:      getStatus(createdTd.Status),
+		CreatedBy:   &createdTd.CreatedBy,
 	}
 
 	return
@@ -83,6 +91,19 @@ func NewService(gormdsn string) (TodoService, error) {
 		return &todoService{}, err
 	}
 	return &todoService{store: store}, nil
+}
+
+func getStatus(s string) *model.TodoStatus {
+	var v model.TodoStatus
+	if s == "Active" {
+		v = model.TodoStatusActive
+		return &v
+	}
+	if s == "Inactive" {
+		v = model.TodoStatusInactive
+		return &v
+	}
+	return nil
 }
 
 // ServiceMiddleware is a chainable behavior modifier for TodoService.

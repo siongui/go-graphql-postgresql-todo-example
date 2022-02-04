@@ -74,6 +74,8 @@ psql_ to connect to the database:
 GraphQL Example
 +++++++++++++++
 
+*getTodo* example #1:
+
 .. code-block:: graphql
 
   {
@@ -82,6 +84,8 @@ GraphQL Example
       content_name
     }
   }
+
+*createTodo* example #1:
 
 .. code-block:: graphql
 
@@ -99,6 +103,34 @@ GraphQL Example
       content_code
       created_date
       updated_date
+    }
+  }
+
+*createTodo* example #2:
+
+.. code-block:: graphql
+
+  mutation {
+    createTodo(
+      input: {
+        content_code: "TD003",
+        content_name: "my content name",
+        description: "my content description",
+        start_date: "2022-01-23T14:20:50.52+08:00",
+        end_date: "2022-01-30T14:20:50.52+08:00",
+        status: Active}
+    ) {
+      id
+      content_code
+      created_date
+      updated_date
+      content_name
+      description
+      start_date
+      end_date
+      status
+      created_by
+      updated_by
     }
   }
 

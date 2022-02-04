@@ -33,7 +33,7 @@ type todoStore struct {
 }
 
 func (s *todoStore) Create(t *Todo) (*Todo, error) {
-	result := s.db.Create(t)
+	result := s.db.Omit("UpdatedBy").Create(t)
 	return t, result.Error
 }
 
