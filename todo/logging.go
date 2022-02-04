@@ -49,7 +49,7 @@ func (mw *loggingMiddleware) TodoPages(pi model.PaginationInput) (tp *model.Todo
 func (mw *loggingMiddleware) TodoSearch(tsi model.TodoSearchInput, pi model.PaginationInput) (tp *model.TodoPagination, err error) {
 	defer func(begin time.Time) {
 		_ = mw.logger.Log(
-			"method", "TodoPages",
+			"method", "TodoSearch",
 			"input(model.TodoSearchInput)", tsi,
 			"input(model.PaginationInput)", pi,
 			"output", *tp,
@@ -65,7 +65,7 @@ func (mw *loggingMiddleware) TodoSearch(tsi model.TodoSearchInput, pi model.Pagi
 func (mw *loggingMiddleware) CreateTodo(ti model.CreateTodoInput, createdby string) (t *model.Todo, err error) {
 	defer func(begin time.Time) {
 		_ = mw.logger.Log(
-			"method", "TodoPages",
+			"method", "CreateTodo",
 			"input", ti,
 			"createdby", createdby,
 			"output", *t,
@@ -81,7 +81,7 @@ func (mw *loggingMiddleware) CreateTodo(ti model.CreateTodoInput, createdby stri
 func (mw *loggingMiddleware) UpdateTodo(id string, ti model.UpdateTodoInput) (t *model.Todo, err error) {
 	defer func(begin time.Time) {
 		_ = mw.logger.Log(
-			"method", "TodoPages",
+			"method", "UpdateTodo",
 			"input(id)", id,
 			"input(model.TodoInput)", ti,
 			"output", *t,
