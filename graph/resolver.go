@@ -15,7 +15,7 @@ type TodoSearchRequest struct {
 }
 
 type UpdateTodoRequest struct {
-	Id int
+	Id string
 	T  model.TodoInput
 }
 

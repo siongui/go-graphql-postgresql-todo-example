@@ -10,7 +10,7 @@ import (
 
 func makeGetTodoEndpoint(svc TodoService) endpoint.Endpoint {
 	return func(ctx context.Context, request interface{}) (interface{}, error) {
-		id := request.(int)
+		id := request.(string)
 		return svc.GetTodo(id)
 	}
 }

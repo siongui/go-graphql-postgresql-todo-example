@@ -16,7 +16,7 @@ func NewLoggingMiddleware(logger log.Logger, s TodoService) TodoService {
 	return &loggingMiddleware{logger, s}
 }
 
-func (mw *loggingMiddleware) GetTodo(id int) (t *model.Todo, err error) {
+func (mw *loggingMiddleware) GetTodo(id string) (t *model.Todo, err error) {
 	defer func(begin time.Time) {
 		_ = mw.logger.Log(
 			"method", "GetTodo",
@@ -77,7 +77,7 @@ func (mw *loggingMiddleware) CreateTodo(ti model.TodoInput) (t *model.Todo, err 
 	return
 }
 
-func (mw *loggingMiddleware) UpdateTodo(id int, ti model.TodoInput) (t *model.Todo, err error) {
+func (mw *loggingMiddleware) UpdateTodo(id string, ti model.TodoInput) (t *model.Todo, err error) {
 	defer func(begin time.Time) {
 		_ = mw.logger.Log(
 			"method", "TodoPages",

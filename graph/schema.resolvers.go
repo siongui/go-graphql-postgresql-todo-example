@@ -15,12 +15,12 @@ func (r *mutationResolver) CreateTodo(ctx context.Context, input model.TodoInput
 	return t.(*model.Todo), err
 }
 
-func (r *mutationResolver) UpdateTodo(ctx context.Context, id int, input model.TodoInput) (*model.Todo, error) {
+func (r *mutationResolver) UpdateTodo(ctx context.Context, id string, input model.TodoInput) (*model.Todo, error) {
 	t, err := r.UpdateTodoEndpoint(ctx, UpdateTodoRequest{Id: id, T: input})
 	return t.(*model.Todo), err
 }
 
-func (r *queryResolver) GetTodo(ctx context.Context, id int) (*model.Todo, error) {
+func (r *queryResolver) GetTodo(ctx context.Context, id string) (*model.Todo, error) {
 	t, err := r.GetTodoEndpoint(ctx, id)
 	return t.(*model.Todo), err
 }

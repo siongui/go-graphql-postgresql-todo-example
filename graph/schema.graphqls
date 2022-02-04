@@ -16,7 +16,7 @@ enum TodoStatus {
 
 "Todo represents one todo item"
 type Todo {
-    id: Int!
+    id: String!
     content_code: String!
     content_name: String
     description: String
@@ -74,7 +74,7 @@ type Query {
     "Find todo by id"
     getTodo(
         "id of the record"
-        id: Int!
+        id: String!
     ): Todo
 
     "Offset based pagination of todo list"
@@ -103,7 +103,7 @@ type Mutation {
     "Update existing todo"
     updateTodo(
         "id of the record"
-        id: Int!,
+        id: String!,
 
         "input for updating todo item"
         input: TodoInput!

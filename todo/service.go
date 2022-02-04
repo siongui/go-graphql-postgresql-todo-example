@@ -2,6 +2,7 @@ package todo
 
 import (
 	"errors"
+	"strconv"
 	"time"
 
 	"github.com/siongui/go-graphql-postgresql-todo-example/graph/model"
@@ -9,18 +10,18 @@ import (
 )
 
 type TodoService interface {
-	GetTodo(int) (*model.Todo, error)
+	GetTodo(string) (*model.Todo, error)
 	TodoPages(model.PaginationInput) (*model.TodoPagination, error)
 	TodoSearch(model.TodoSearchInput, model.PaginationInput) (*model.TodoPagination, error)
 	CreateTodo(model.TodoInput) (*model.Todo, error)
-	UpdateTodo(int, model.TodoInput) (*model.Todo, error)
+	UpdateTodo(string, model.TodoInput) (*model.Todo, error)
 }
 
 type todoService struct {
 	store tododb.TodoStore
 }
 
-func (s *todoService) GetTodo(id int) (t *model.Todo, err error) {
+func (s *todoService) GetTodo(id string) (t *model.Todo, err error) {
 	t = &model.Todo{}
 	return
 }
@@ -79,7 +80,7 @@ func (s *todoService) CreateTodo(ti model.TodoInput) (t *model.Todo, err error) 
 
 	// TODO: create gqlgen custom scalar uint so we do not need to use int()
 	t = &model.Todo{
-		ID:          int(createdTd.ID),
+		ID:          strconv.FormatUint(uint64(createdTd.ID), 10),
 		ContentCode: createdTd.ContentCode,
 		//CreatedDate: createdTd.CreatedAt.UTC().Format(time.RFC3339),
 		CreatedDate: createdTd.CreatedAt.Format(time.RFC3339),
@@ -90,7 +91,7 @@ func (s *todoService) CreateTodo(ti model.TodoInput) (t *model.Todo, err error) 
 	return
 }
 
-func (s *todoService) UpdateTodo(id int, ti model.TodoInput) (t *model.Todo, err error) {
+func (s *todoService) UpdateTodo(id string, ti model.TodoInput) (t *model.Todo, err error) {
 	t = &model.Todo{}
 	return
 }

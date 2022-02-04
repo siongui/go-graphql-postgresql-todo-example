@@ -26,7 +26,7 @@ func NewInstrumentingMiddleware(
 	}
 }
 
-func (mw *instrumentingMiddleware) GetTodo(id int) (t *model.Todo, err error) {
+func (mw *instrumentingMiddleware) GetTodo(id string) (t *model.Todo, err error) {
 	defer func(begin time.Time) {
 		lvs := []string{"method", "GetTodo", "error", fmt.Sprint(err != nil)}
 		mw.requestCount.With(lvs...).Add(1)
@@ -70,7 +70,7 @@ func (mw *instrumentingMiddleware) CreateTodo(ti model.TodoInput) (t *model.Todo
 	return
 }
 
-func (mw *instrumentingMiddleware) UpdateTodo(id int, ti model.TodoInput) (t *model.Todo, err error) {
+func (mw *instrumentingMiddleware) UpdateTodo(id string, ti model.TodoInput) (t *model.Todo, err error) {
 	defer func(begin time.Time) {
 		lvs := []string{"method", "UpdateTodo", "error", fmt.Sprint(err != nil)}
 		mw.requestCount.With(lvs...).Add(1)
