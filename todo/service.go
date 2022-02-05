@@ -4,9 +4,9 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/siongui/go-graphql-postgresql-todo-example/graph/model"
-	"github.com/siongui/go-graphql-postgresql-todo-example/graph/scalar"
-	"github.com/siongui/go-graphql-postgresql-todo-example/todo/tododb"
+	"github.com/siongui/go-kit-gqlgen-postgres-todo-example/graph/model"
+	"github.com/siongui/go-kit-gqlgen-postgres-todo-example/graph/scalar"
+	"github.com/siongui/go-kit-gqlgen-postgres-todo-example/todo/tododb"
 )
 
 type TodoService interface {

@@ -6,8 +6,8 @@ package graph
 import (
 	"context"
 
-	"github.com/siongui/go-graphql-postgresql-todo-example/graph/generated"
-	"github.com/siongui/go-graphql-postgresql-todo-example/graph/model"
+	"github.com/siongui/go-kit-gqlgen-postgres-todo-example/graph/generated"
+	"github.com/siongui/go-kit-gqlgen-postgres-todo-example/graph/model"
 )
 
 func (r *mutationResolver) CreateTodo(ctx context.Context, input model.CreateTodoInput) (*model.Todo, error) {

@@ -4,8 +4,8 @@ import (
 	"net/http"
 	"os"
 
-	"github.com/siongui/go-graphql-postgresql-todo-example/config"
-	"github.com/siongui/go-graphql-postgresql-todo-example/todo"
+	"github.com/siongui/go-kit-gqlgen-postgres-todo-example/config"
+	"github.com/siongui/go-kit-gqlgen-postgres-todo-example/todo"
 
 	"github.com/99designs/gqlgen/graphql/playground"
 	"github.com/go-kit/kit/log"

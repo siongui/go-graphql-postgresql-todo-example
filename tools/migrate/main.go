@@ -5,7 +5,7 @@ import (
 	"os"
 
 	"github.com/go-kit/kit/log"
-	"github.com/siongui/go-graphql-postgresql-todo-example/config"
+	"github.com/siongui/go-kit-gqlgen-postgres-todo-example/config"
 
 	"github.com/golang-migrate/migrate/v4"
 	_ "github.com/golang-migrate/migrate/v4/database/postgres"

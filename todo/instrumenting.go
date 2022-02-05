@@ -5,7 +5,7 @@ import (
 	"time"
 
 	"github.com/go-kit/kit/metrics"
-	"github.com/siongui/go-graphql-postgresql-todo-example/graph/model"
+	"github.com/siongui/go-kit-gqlgen-postgres-todo-example/graph/model"
 )
 
 type instrumentingMiddleware struct {

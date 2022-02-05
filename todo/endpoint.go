@@ -4,8 +4,8 @@ import (
 	"context"
 
 	"github.com/go-kit/kit/endpoint"
-	"github.com/siongui/go-graphql-postgresql-todo-example/graph"
-	"github.com/siongui/go-graphql-postgresql-todo-example/graph/model"
+	"github.com/siongui/go-kit-gqlgen-postgres-todo-example/graph"
+	"github.com/siongui/go-kit-gqlgen-postgres-todo-example/graph/model"
 )
 
 func makeGetTodoEndpoint(svc TodoService) endpoint.Endpoint {

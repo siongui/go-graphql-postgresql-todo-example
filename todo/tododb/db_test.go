@@ -4,7 +4,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/siongui/go-graphql-postgresql-todo-example/config"
+	"github.com/siongui/go-kit-gqlgen-postgres-todo-example/config"
 )
 
 func TestCreate(t *testing.T) {

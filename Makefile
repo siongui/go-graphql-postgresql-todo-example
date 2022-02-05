@@ -12,7 +12,7 @@ export GOPATH=$(realpath ./tools/)
 export PATH := $(GOPATH)/bin:$(PATH)
 endif
 
-PKGNAME=github.com/siongui/go-graphql-postgresql-todo-example
+PKGNAME=github.com/siongui/go-kit-gqlgen-postgres-todo-example
 MIGRATIONS_DIR=$(CURDIR)/migrations/
 GQLGEN?=go run github.com/99designs/gqlgen
 ALL_GO_SOURCES=$(shell /bin/sh -c "find *.go | grep -v _test.go")

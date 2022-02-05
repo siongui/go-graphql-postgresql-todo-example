@@ -5,17 +5,17 @@ Go GraphQL PostgreSQL Todo Example
 .. image:: https://img.shields.io/badge/Language-Go-blue.svg
    :target: https://golang.org/
 
-.. image:: https://godoc.org/github.com/siongui/go-graphql-postgresql-todo-example?status.svg
-   :target: https://godoc.org/github.com/siongui/go-graphql-postgresql-todo-example
+.. image:: https://godoc.org/github.com/siongui/go-kit-gqlgen-postgres-todo-example?status.svg
+   :target: https://godoc.org/github.com/siongui/go-kit-gqlgen-postgres-todo-example
 
-.. image:: https://github.com/siongui/go-graphql-postgresql-todo-example/workflows/ci/badge.svg
-    :target: https://github.com/siongui/go-graphql-postgresql-todo-example/blob/master/.github/workflows/ci.yml
+.. image:: https://github.com/siongui/go-kit-gqlgen-postgres-todo-example/workflows/ci/badge.svg
+    :target: https://github.com/siongui/go-kit-gqlgen-postgres-todo-example/blob/master/.github/workflows/ci.yml
 
-.. image:: https://goreportcard.com/badge/github.com/siongui/go-graphql-postgresql-todo-example
-   :target: https://goreportcard.com/report/github.com/siongui/go-graphql-postgresql-todo-example
+.. image:: https://goreportcard.com/badge/github.com/siongui/go-kit-gqlgen-postgres-todo-example
+   :target: https://goreportcard.com/report/github.com/siongui/go-kit-gqlgen-postgres-todo-example
 
 .. image:: https://img.shields.io/badge/license-Unlicense-blue.svg
-   :target: https://github.com/siongui/go-graphql-postgresql-todo-example/blob/master/UNLICENSE
+   :target: https://github.com/siongui/go-kit-gqlgen-postgres-todo-example/blob/master/UNLICENSE
 
 
 `Go kit`_ + GraphQL_ (gqlgen_) + PostgreSQL_ Todo example for Go_.

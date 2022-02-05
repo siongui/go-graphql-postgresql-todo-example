@@ -1,4 +1,4 @@
-module github.com/siongui/go-graphql-postgresql-todo-example
+module github.com/siongui/go-kit-gqlgen-postgres-todo-example
 
 go 1.17
 
