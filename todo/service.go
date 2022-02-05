@@ -25,6 +25,11 @@ type todoService struct {
 
 func (s *todoService) GetTodo(id string) (t *model.Todo, err error) {
 	t = &model.Todo{}
+	td, err := s.store.GetTodo(id)
+	if err != nil {
+		return
+	}
+	t = toModelTodo(td)
 	return
 }
 

@@ -25,12 +25,19 @@ type Todo struct {
 }
 
 type TodoStore interface {
+	GetTodo(string) (Todo, error)
 	Create(t *Todo) (*Todo, error)
 	Pages(count, page int) ([]Todo, int64, error)
 }
 
 type todoStore struct {
 	db *gorm.DB
+}
+
+func (s *todoStore) GetTodo(id string) (t Todo, err error) {
+	result := s.db.First(&t, id)
+	err = result.Error
+	return
 }
 
 func (s *todoStore) Create(t *Todo) (*Todo, error) {
