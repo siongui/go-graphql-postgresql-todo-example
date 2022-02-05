@@ -26,6 +26,7 @@ type Todo struct {
 
 type TodoStore interface {
 	Create(t *Todo) (*Todo, error)
+	Pages(count, page int) ([]Todo, int64, error)
 }
 
 type todoStore struct {
@@ -35,6 +36,22 @@ type todoStore struct {
 func (s *todoStore) Create(t *Todo) (*Todo, error) {
 	result := s.db.Omit("UpdatedBy").Create(t)
 	return t, result.Error
+}
+
+// Pages returns the Todo records in the database, given the record count per
+// page and n-th page.
+func (s *todoStore) Pages(count, page int) (todos []Todo, totalCount int64, err error) {
+	// Get total count
+	result := s.db.Model(&Todo{}).Count(&totalCount)
+	if result.Error != nil {
+		err = result.Error
+		return
+	}
+
+	// Get records in the given count and page.
+	result = s.db.Limit(count).Offset((page - 1) * count).Order("created_at").Find(&todos)
+	err = result.Error
+	return
 }
 
 func NewTodoStore(gormdsn string) (TodoStore, error) {

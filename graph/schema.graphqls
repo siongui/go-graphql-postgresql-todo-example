@@ -63,14 +63,16 @@ input TodoSearchInput {
 
 "PaginationInput ...(desciption to be added)"
 input PaginationInput {
+    "record count per page, 1 based indexing"
     count: Int! = 10
+    "n-th page, 1 based indexing"
     page: Int! = 1
 }
 
 "TodoPagination is paginated todo items"
 type TodoPagination {
-    PaginationInfo: PaginationInfo!
-    Todos: [Todo!]!
+    pagination_info: PaginationInfo!
+    todos: [Todo!]!
 }
 
 "PaginationInfo represents pagination information"

@@ -1,6 +1,8 @@
 package todo
 
 import (
+	"errors"
+	"math"
 	"strconv"
 	"time"
 
@@ -28,6 +30,40 @@ func (s *todoService) GetTodo(id string) (t *model.Todo, err error) {
 
 func (s *todoService) TodoPages(pi model.PaginationInput) (tp *model.TodoPagination, err error) {
 	tp = &model.TodoPagination{}
+	// record count per page
+	count := pi.Count
+	// n-th page
+	page := pi.Page
+
+	if count < 1 {
+		err = errors.New("TodoPages: count must >= 1")
+		return
+	}
+
+	if page < 1 {
+		err = errors.New("TodoPages: page must >= 1")
+		return
+	}
+
+	todos, totalCount, err := s.store.Pages(count, page)
+	if err != nil {
+		return
+	}
+
+	var modelTodos []*model.Todo
+	for _, todo := range todos {
+		modelTodos = append(modelTodos, toModelTodo(todo))
+	}
+
+	tp = &model.TodoPagination{
+		PaginationInfo: &model.PaginationInfo{
+			TotalCount:  int(totalCount),
+			CurrentPage: page,
+			TotalPages:  int(math.Ceil(float64(totalCount) / float64(count))),
+		},
+		Todos: modelTodos,
+	}
+
 	return
 }
 
@@ -53,20 +89,7 @@ func (s *todoService) CreateTodo(ti model.CreateTodoInput, createdby string) (t 
 		return
 	}
 
-	sd := scalar.DateTime(createdTd.StartDate)
-	ed := scalar.DateTime(createdTd.EndDate)
-	t = &model.Todo{
-		ID:          strconv.FormatUint(uint64(createdTd.ID), 10),
-		CreatedDate: scalar.DateTime(createdTd.CreatedAt),
-		UpdatedDate: scalar.DateTime(createdTd.UpdatedAt),
-		ContentCode: createdTd.ContentCode,
-		ContentName: &createdTd.ContentName,
-		Description: &createdTd.Description,
-		StartDate:   &sd,
-		EndDate:     &ed,
-		Status:      getStatus(createdTd.Status),
-		CreatedBy:   &createdTd.CreatedBy,
-	}
+	t = toModelTodo(*createdTd)
 
 	return
 }
@@ -95,6 +118,30 @@ func getStatus(s string) *model.TodoStatus {
 		return &v
 	}
 	return nil
+}
+
+func toModelTodo(todo tododb.Todo) *model.Todo {
+	sd := scalar.DateTime(todo.StartDate)
+	ed := scalar.DateTime(todo.EndDate)
+	mtd := model.Todo{
+		ID:          strconv.FormatUint(uint64(todo.ID), 10),
+		CreatedDate: scalar.DateTime(todo.CreatedAt),
+		UpdatedDate: scalar.DateTime(todo.UpdatedAt),
+		ContentCode: todo.ContentCode,
+		ContentName: &todo.ContentName,
+		Description: &todo.Description,
+		StartDate:   &sd,
+		EndDate:     &ed,
+		Status:      getStatus(todo.Status),
+		CreatedBy:   &todo.CreatedBy,
+		UpdatedBy:   &todo.UpdatedBy,
+	}
+
+	if todo.UpdatedBy == "" {
+		mtd.UpdatedBy = nil
+	}
+
+	return &mtd
 }
 
 // ServiceMiddleware is a chainable behavior modifier for TodoService.

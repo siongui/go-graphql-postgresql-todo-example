@@ -134,6 +134,33 @@ GraphQL Example
     }
   }
 
+*TodoPages* example:
+
+.. code-block:: graphql
+
+  {
+    TodoPages(paginationInput: {count: 5, page: 1}) {
+      pagination_info {
+        total_count
+        total_pages
+        current_page
+      }
+      todos {
+        id
+        content_code
+        created_date
+        updated_date
+        content_name
+        description
+        start_date
+        end_date
+        status
+        created_by
+        updated_by
+      }
+    }
+  }
+
 
 GraphQL Schema Linter
 +++++++++++++++++++++
