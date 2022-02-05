@@ -86,11 +86,11 @@ func NewService(gormdsn string) (TodoService, error) {
 
 func getStatus(s string) *model.TodoStatus {
 	var v model.TodoStatus
-	if s == "Active" {
+	if s == model.TodoStatusActive.String() {
 		v = model.TodoStatusActive
 		return &v
 	}
-	if s == "Inactive" {
+	if s == model.TodoStatusInactive.String() {
 		v = model.TodoStatusInactive
 		return &v
 	}
