@@ -19,6 +19,7 @@ COPY gqlgen.yml ./
 COPY ./graph/resolver.go ./graph/resolver.go
 COPY ./graph/schema.graphqls ./graph/schema.graphqls
 COPY ./graph/schema.resolvers.go ./graph/schema.resolvers.go
+COPY ./graph/scalar/ ./graph/scalar/
 COPY Makefile ./Makefile
 
 RUN apk add build-base
