@@ -18,7 +18,7 @@ Go GraphQL PostgreSQL Todo Example
    :target: https://github.com/siongui/go-graphql-postgresql-todo-example/blob/master/UNLICENSE
 
 
-`Go kit`_ + GraphQL_ + PostgreSQL_ Todo example for Go_.
+`Go kit`_ + GraphQL_ (gqlgen_) + PostgreSQL_ Todo example for Go_.
 
 Development Environment:
 
@@ -268,6 +268,7 @@ References
 .. _Go: https://golang.org/
 .. _Go kit: https://gokit.io/
 .. _GraphQL: https://graphql.org/
+.. _gqlgen: https://github.com/99designs/gqlgen
 .. _PostgreSQL: https://www.postgresql.org/
 .. _Ubuntu 20.04: https://releases.ubuntu.com/20.04/
 .. _Go 1.17: https://golang.org/dl/
