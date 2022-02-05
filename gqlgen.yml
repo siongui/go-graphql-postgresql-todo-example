@@ -55,3 +55,6 @@ models:
       - github.com/99designs/gqlgen/graphql.Int
       - github.com/99designs/gqlgen/graphql.Int64
       - github.com/99designs/gqlgen/graphql.Int32
+  DateTime:
+    model:
+      - github.com/siongui/go-graphql-postgresql-todo-example/graph/scalar.DateTime

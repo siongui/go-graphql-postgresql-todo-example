@@ -5,6 +5,7 @@ import (
 	"time"
 
 	"github.com/siongui/go-graphql-postgresql-todo-example/graph/model"
+	"github.com/siongui/go-graphql-postgresql-todo-example/graph/scalar"
 	"github.com/siongui/go-graphql-postgresql-todo-example/todo/tododb"
 )
 
@@ -41,33 +42,23 @@ func (s *todoService) CreateTodo(ti model.CreateTodoInput, createdby string) (t 
 		ContentCode: ti.ContentCode,
 		ContentName: ti.ContentName,
 		Description: ti.Description,
+		StartDate:   time.Time(ti.StartDate),
+		EndDate:     time.Time(ti.EndDate),
 		Status:      ti.Status.String(),
 		CreatedBy:   createdby,
 	}
-
-	startDate, err := time.Parse(time.RFC3339, ti.StartDate)
-	if err != nil {
-		return t, err
-	}
-	td.StartDate = startDate
-	endDate, err := time.Parse(time.RFC3339, ti.EndDate)
-	if err != nil {
-		return t, err
-	}
-	td.EndDate = endDate
 
 	createdTd, err := s.store.Create(&td)
 	if err != nil {
 		return
 	}
 
-	sd := createdTd.StartDate.Format(time.RFC3339)
-	ed := createdTd.EndDate.Format(time.RFC3339)
+	sd := scalar.DateTime(createdTd.StartDate)
+	ed := scalar.DateTime(createdTd.EndDate)
 	t = &model.Todo{
-		ID: strconv.FormatUint(uint64(createdTd.ID), 10),
-		//CreatedDate: createdTd.CreatedAt.UTC().Format(time.RFC3339),
-		CreatedDate: createdTd.CreatedAt.Format(time.RFC3339),
-		UpdatedDate: createdTd.UpdatedAt.Format(time.RFC3339),
+		ID:          strconv.FormatUint(uint64(createdTd.ID), 10),
+		CreatedDate: scalar.DateTime(createdTd.CreatedAt),
+		UpdatedDate: scalar.DateTime(createdTd.UpdatedAt),
 		ContentCode: createdTd.ContentCode,
 		ContentName: &createdTd.ContentName,
 		Description: &createdTd.Description,

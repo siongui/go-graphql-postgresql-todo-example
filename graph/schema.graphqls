@@ -2,7 +2,10 @@
 #
 # https://gqlgen.com/getting-started/
 
-"DateTime must be valid RFC3339 format"
+"""
+DateTime must be valid RFC3339 format
+https://pkg.go.dev/time#pkg-constants
+"""
 scalar DateTime
 
 "TodoStatus represents the status of Todo item"

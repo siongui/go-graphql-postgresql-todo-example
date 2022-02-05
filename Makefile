@@ -24,6 +24,7 @@ fmt:
 	@go fmt *.go
 	@go fmt config/*.go
 	@go fmt graph/*.go
+	@go fmt graph/scalar/*.go
 	@go fmt todo/*.go
 	@go fmt todo/tododb/*.go
 	@go fmt tools/*.go
