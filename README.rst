@@ -79,9 +79,18 @@ GraphQL Example
 .. code-block:: graphql
 
   {
-    getTodo(id: 1) {
+    getTodo(id: "1") {
+      id
       content_code
+      created_date
+      updated_date
       content_name
+      description
+      start_date
+      end_date
+      status
+      created_by
+      updated_by
     }
   }
 
