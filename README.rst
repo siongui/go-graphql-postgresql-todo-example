@@ -36,18 +36,24 @@ After git clone this repo, generate and run server:
 .. code-block:: bash
 
   $ cd /path/to/this/repo/
-  # Install necessary dependencies
-  $ go mod download
-  # go generate server code
+  # go generate GraphQL code
   $ make schema_generate
+
+See next section to run dockerized PostgreSQL. After PostgreSQL is running:
+
+.. code-block:: bash
+
   # database migrations
-  $ make database_migrations_local_development
+  $ make database_migrations
   # Run server
   $ make
 
+After the server is running, click on the link of log message. Now you can send
+GraphQL requests via web interface.
 
-PostgreSQL
-++++++++++
+
+Run Dockerized PostgreSQL
++++++++++++++++++++++++++
 
 Install Docker_ and `Docker Compose`_
 

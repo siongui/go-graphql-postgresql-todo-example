@@ -39,7 +39,7 @@ schema_generate:
 graphql_schema_lint:
 	npx graphql-schema-linter
 
-database_migrations_local_development: fmt
+database_migrations: fmt
 	go run tools/migrate/main.go -ssl=false -dir=$(MIGRATIONS_DIR)
 
 local_dev_get_metrics:
