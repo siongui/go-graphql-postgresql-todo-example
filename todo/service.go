@@ -89,12 +89,12 @@ func (s *todoService) CreateTodo(ti model.CreateTodoInput, createdby string) (t 
 		CreatedBy:   createdby,
 	}
 
-	createdTd, err := s.store.Create(&td)
+	createdTd, err := s.store.Create(td)
 	if err != nil {
 		return
 	}
 
-	t = toModelTodo(*createdTd)
+	t = toModelTodo(createdTd)
 
 	return
 }

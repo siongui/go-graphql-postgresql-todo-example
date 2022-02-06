@@ -26,7 +26,7 @@ type Todo struct {
 
 type TodoStore interface {
 	GetTodo(string) (Todo, error)
-	Create(t *Todo) (*Todo, error)
+	Create(Todo) (Todo, error)
 	Pages(count, page int) ([]Todo, int64, error)
 }
 
@@ -40,8 +40,8 @@ func (s *todoStore) GetTodo(id string) (t Todo, err error) {
 	return
 }
 
-func (s *todoStore) Create(t *Todo) (*Todo, error) {
-	result := s.db.Omit("UpdatedBy").Create(t)
+func (s *todoStore) Create(t Todo) (Todo, error) {
+	result := s.db.Omit("UpdatedBy").Create(&t)
 	return t, result.Error
 }
 
