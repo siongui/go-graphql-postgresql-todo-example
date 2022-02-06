@@ -98,3 +98,14 @@ jobs:
         uses: actions/checkout@v2
       - name: Run graphql-schema-linter
         run: npx graphql-schema-linter
+
+  golangci:
+    name: lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: make schema_generate
+      - name: golangci-lint
+        uses: golangci/golangci-lint-action@v2
+        with:
+          version: latest
