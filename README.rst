@@ -226,6 +226,71 @@ GraphQL Example
     }
   }
 
+*TodoSearch* example #1:
+
+.. code-block:: graphql
+
+  query {
+    TodoSearch(
+      paginationInput: {count: 5, page: 1}
+      input:{
+        content_code: "00"
+      }
+    ) {
+      pagination_info {
+        total_count
+        total_pages
+        current_page
+      }
+      todos {
+        id
+        content_code
+        created_date
+        updated_date
+        content_name
+        description
+        start_date
+        end_date
+        status
+        created_by
+        updated_by
+      }
+    }
+  }
+
+*TodoSearch* example #2:
+
+.. code-block:: graphql
+
+  query {
+    TodoSearch(
+      paginationInput: {count: 5, page: 1}
+      input:{
+        start_date: "2022-02-06T07:11:18+08:00"
+        status: Inactive
+      }
+    ) {
+      pagination_info {
+        total_count
+        total_pages
+        current_page
+      }
+      todos {
+        id
+        content_code
+        created_date
+        updated_date
+        content_name
+        description
+        start_date
+        end_date
+        status
+        created_by
+        updated_by
+      }
+    }
+  }
+
 
 GraphQL Schema Linter
 +++++++++++++++++++++

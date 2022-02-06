@@ -29,6 +29,7 @@ type TodoStore interface {
 	Create(Todo) (Todo, error)
 	Save(Todo) error
 	Pages(count, page int) ([]Todo, int64, error)
+	Search(int, int, map[string]interface{}) ([]Todo, int64, error)
 }
 
 type todoStore struct {
@@ -64,6 +65,25 @@ func (s *todoStore) Pages(count, page int) (todos []Todo, totalCount int64, err 
 	// Get records in the given count and page.
 	result = s.db.Limit(count).Offset((page - 1) * count).Order("created_at").Find(&todos)
 	err = result.Error
+	return
+}
+
+func (s *todoStore) Search(count, page int, condition map[string]interface{}) (todos []Todo, totalCount int64, err error) {
+	query := s.db.Model(&Todo{})
+	queryTotalCount := s.db.Model(&Todo{})
+	for k, v := range condition {
+		query.Where(k, v)
+		queryTotalCount.Where(k, v)
+	}
+
+	queryResult := query.Limit(count).Offset((page - 1) * count).Find(&todos)
+	if queryResult.Error != nil {
+		err = queryResult.Error
+		return
+	}
+
+	queryTotalCountResult := queryTotalCount.Count(&totalCount)
+	err = queryTotalCountResult.Error
 	return
 }
 

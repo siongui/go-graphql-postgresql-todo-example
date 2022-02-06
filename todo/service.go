@@ -41,12 +41,12 @@ func (s *todoService) TodoPages(pi model.PaginationInput) (tp *model.TodoPaginat
 	page := pi.Page
 
 	if count < 1 {
-		err = errors.New("TodoPages: count must >= 1")
+		err = errors.New("TodoPages: count must >= 1 (1 based indexing)")
 		return
 	}
 
 	if page < 1 {
-		err = errors.New("TodoPages: page must >= 1")
+		err = errors.New("TodoPages: page must >= 1 (1 based indexing)")
 		return
 	}
 
@@ -74,6 +74,58 @@ func (s *todoService) TodoPages(pi model.PaginationInput) (tp *model.TodoPaginat
 
 func (s *todoService) TodoSearch(tsi model.TodoSearchInput, pi model.PaginationInput) (tp *model.TodoPagination, err error) {
 	tp = &model.TodoPagination{}
+	// record count per page
+	count := pi.Count
+	// n-th page
+	page := pi.Page
+
+	if count < 1 {
+		err = errors.New("TodoSearch: count must >= 1 (1 based indexing)")
+		return
+	}
+
+	if page < 1 {
+		err = errors.New("TodoSearch: page must >= 1 (1 based indexing)")
+		return
+	}
+
+	var condition = make(map[string]interface{})
+
+	if tsi.ContentCode != nil {
+		condition["content_code ILIKE ?"] = "%" + *tsi.ContentCode + "%"
+	}
+	if tsi.ContentName != nil {
+		condition["content_name ILIKE ?"] = "%" + *tsi.ContentName + "%"
+	}
+	if tsi.StartDate != nil {
+		condition["created_at >= ?"] = *tsi.StartDate
+	}
+	if tsi.EndDate != nil {
+		condition["created_at <= ?"] = *tsi.EndDate
+	}
+	if tsi.Status != nil {
+		condition["status = ?"] = (*tsi.Status).String()
+	}
+
+	todos, totalCount, err := s.store.Search(count, page, condition)
+	if err != nil {
+		return
+	}
+
+	var modelTodos []*model.Todo
+	for _, todo := range todos {
+		modelTodos = append(modelTodos, toModelTodo(todo))
+	}
+
+	tp = &model.TodoPagination{
+		PaginationInfo: &model.PaginationInfo{
+			TotalCount:  int(totalCount),
+			CurrentPage: page,
+			TotalPages:  int(math.Ceil(float64(totalCount) / float64(count))),
+		},
+		Todos: modelTodos,
+	}
+
 	return
 }
 
