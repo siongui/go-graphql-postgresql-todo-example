@@ -18,7 +18,7 @@ Go GraphQL PostgreSQL Todo Example
    :target: https://github.com/siongui/go-kit-gqlgen-postgres-todo-example/blob/master/UNLICENSE
 
 
-`Go kit`_ + GraphQL_ (gqlgen_) + PostgreSQL_ Todo example for Go_.
+`Go kit`_ + GraphQL_ (gqlgen_) + PostgreSQL_ + gorm_ Todo example for Go_.
 
 Development Environment:
 
@@ -298,10 +298,15 @@ GraphQL Example
   }
 
 
-GraphQL Schema Linter
-+++++++++++++++++++++
+Linter
+++++++
 
-Use graphql-schema-linter_ for schema linting. See
+Two linters are used. graphql-schema-linter_ and golangci-lint_.
+
+GraphQL Schema Linter
+---------------------
+
+Use graphql-schema-linter_ for GraphQL schema linting. See
 `.graphql-schema-linterrc <.graphql-schema-linterrc>`_ for linting config.
 
 To run the linter:
@@ -309,6 +314,24 @@ To run the linter:
 .. code-block:: bash
 
   $ make graphql_schema_lint
+
+golangci-lint
+-------------
+
+Use golangci-lint_ for Go code linting. See
+`.golangci.yml <.golangci.yml>`_ for linter config.
+
+To install golangci-lint:
+
+.. code-block:: bash
+
+  $ make install_golangci_lint
+
+To run golangci-lint:
+
+.. code-block:: bash
+
+  $ make golangci_lint
 
 
 Database Migrations
@@ -394,18 +417,34 @@ The table name is *my_types*
 Code Structure
 ++++++++++++++
 
+app config
+----------
+
 - `config/ <config/>`_: application configuration
-- `graph/ <graph/>`_: GraphQL schema
+
+GraphQL
+-------
+
+- `gqlgen.yml <gqlgen.yml>`_: gqlgen config file.
+- `graph/ <graph/>`_: GraphQL schema, resolvers, and custom scalar.
+
+business logic
+--------------
+
 - `todo/ <todo/>`_: Go micro service - *todo*
+- `todo/tododb/ <todo/tododb/>`_: database library for *todo* service.
+
+database migrations
+-------------------
+
+- `tools/migrate/ <tools/migrate/>`_: command line tool for database migrations.
+- `migrations/ <migrations/>`_: database migrations SQL files.
+
+dependency tracking
+-------------------
+
 - `tools/tools.go <tools/tools.go>`_: Track tool dependencies for a module.
   See [2]_
-
-
-Issues
-++++++
-
-- generating core failed: comment the ``autobind`` in https://gqlgen.com/config.
-  See `generating core failed: unable to load example/graph/model in v0.16 <https://github.com/99designs/gqlgen/issues/1860>`_
 
 
 UNLICENSE
@@ -427,6 +466,8 @@ References
        | `GraphQL support · Issue #636 · go-kit/kit · GitHub <https://github.com/go-kit/kit/issues/636>`_
        | `Add initial GraphQL support by sagikazarmark · Pull Request #81 · sagikazarmark/modern-go-application · GitHub <https://github.com/sagikazarmark/modern-go-application/pull/81>`_
 .. [7] `jinzhu/configor: Golang Configuration tool that support YAML, JSON, TOML, Shell Environment <https://github.com/jinzhu/configor>`_
+.. [8] generating core failed: comment the ``autobind`` in https://gqlgen.com/config.
+       See `generating core failed: unable to load example/graph/model in v0.16 <https://github.com/99designs/gqlgen/issues/1860>`_
 
 .. _Go: https://golang.org/
 .. _Go kit: https://gokit.io/
@@ -439,6 +480,7 @@ References
 .. _Docker Compose: https://docs.docker.com/compose/install/
 .. _psql: https://www.postgresguide.com/utilities/psql/
 .. _graphql-schema-linter: https://github.com/cjoudrey/graphql-schema-linter
+.. _golangci-lint: https://golangci-lint.run/
 .. _golang-migrate: https://github.com/golang-migrate/migrate
 .. _golang-migrate CLI: https://github.com/golang-migrate/migrate/tree/master/cmd/migrate
 .. _gorm: https://gorm.io/
