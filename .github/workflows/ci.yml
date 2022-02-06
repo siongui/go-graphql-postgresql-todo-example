@@ -108,8 +108,10 @@ jobs:
         with:
           go-version: '1.17'
       - run: make schema_generate
-      - name: golangci-lint
-        uses: golangci/golangci-lint-action@v2
-        with:
-          version: latest
-          working-directory: ./todo/
+      - run: make install_golangci_lint
+      - run: make golangci_lint
+      #- name: golangci-lint
+      #  uses: golangci/golangci-lint-action@v2
+      #  with:
+      #    version: latest
+      #    working-directory: ./todo/
