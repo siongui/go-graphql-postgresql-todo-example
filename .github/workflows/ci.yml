@@ -110,6 +110,6 @@ jobs:
       - run: make schema_generate
       - name: golangci-lint
         uses: golangci/golangci-lint-action@v2
-        run: make golangci_lint
         with:
           version: latest
+          working-directory: main.go
