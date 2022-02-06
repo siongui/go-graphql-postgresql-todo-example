@@ -20,8 +20,9 @@ type CreateTodoRequest struct {
 }
 
 type UpdateTodoRequest struct {
-	Id string
-	T  model.UpdateTodoInput
+	Id        string
+	T         model.UpdateTodoInput
+	UpdatedBy string
 }
 
 type Resolver struct {

@@ -16,7 +16,7 @@ type TodoService interface {
 	TodoPages(model.PaginationInput) (*model.TodoPagination, error)
 	TodoSearch(model.TodoSearchInput, model.PaginationInput) (*model.TodoPagination, error)
 	CreateTodo(model.CreateTodoInput, string) (*model.Todo, error)
-	UpdateTodo(string, model.UpdateTodoInput) (*model.Todo, error)
+	UpdateTodo(string, model.UpdateTodoInput, string) (*model.Todo, error)
 }
 
 type todoService struct {
@@ -99,8 +99,40 @@ func (s *todoService) CreateTodo(ti model.CreateTodoInput, createdby string) (t 
 	return
 }
 
-func (s *todoService) UpdateTodo(id string, ti model.UpdateTodoInput) (t *model.Todo, err error) {
+func (s *todoService) UpdateTodo(id string, ti model.UpdateTodoInput, updatedby string) (t *model.Todo, err error) {
 	t = &model.Todo{}
+	td, err := s.store.GetTodo(id)
+	if err != nil {
+		return
+	}
+	td.UpdatedBy = updatedby
+
+	if ti.ContentCode != nil {
+		td.ContentCode = *ti.ContentCode
+	}
+	if ti.ContentName != nil {
+		td.ContentName = *ti.ContentName
+	}
+	if ti.Description != nil {
+		td.Description = *ti.Description
+	}
+	if ti.StartDate != nil {
+		td.StartDate = time.Time(*ti.StartDate)
+	}
+	if ti.EndDate != nil {
+		td.EndDate = time.Time(*ti.EndDate)
+	}
+	if ti.Status != nil {
+		td.Status = (*ti.Status).String()
+	}
+	err = s.store.Save(td)
+	if err != nil {
+		return
+	}
+	updatedTd, err := s.store.GetTodo(id)
+	if err == nil {
+		t = toModelTodo(updatedTd)
+	}
 	return
 }
 

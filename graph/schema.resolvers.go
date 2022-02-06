@@ -18,7 +18,9 @@ func (r *mutationResolver) CreateTodo(ctx context.Context, input model.CreateTod
 }
 
 func (r *mutationResolver) UpdateTodo(ctx context.Context, id string, input model.UpdateTodoInput) (*model.Todo, error) {
-	t, err := r.UpdateTodoEndpoint(ctx, UpdateTodoRequest{Id: id, T: input})
+	// TODO: updatedby is email address of login user. use fixed value now.
+	updatedby := "updator@example.com"
+	t, err := r.UpdateTodoEndpoint(ctx, UpdateTodoRequest{Id: id, T: input, UpdatedBy: updatedby})
 	return t.(*model.Todo), err
 }
 

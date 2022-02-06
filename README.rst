@@ -170,6 +170,62 @@ GraphQL Example
     }
   }
 
+*updateTodo* example #1:
+
+.. code-block:: graphql
+
+  mutation {
+    updateTodo(
+      id: "1000"
+      input: {
+        content_code: "TD0031",
+        content_name: "my updated content name",
+        description: "my updated content description",
+        start_date: "2022-02-01T14:20:50.52+08:00",
+        end_date: "2022-02-02T14:20:50.52+08:00",
+        status: Inactive}
+    ) {
+      id
+      content_code
+      created_date
+      updated_date
+      content_name
+      description
+      start_date
+      end_date
+      status
+      created_by
+      updated_by
+    }
+  }
+
+*updateTodo* example #2:
+
+.. code-block:: graphql
+
+  mutation {
+    updateTodo(
+      id: "5"
+      input: {
+        content_code: "TD007",
+        content_name: "my updated content name2",
+        description: "my updated content description7",
+        status: Inactive}
+    ) {
+      id
+      content_code
+      created_date
+      updated_date
+      content_name
+      description
+      start_date
+      end_date
+      status
+      created_by
+      updated_by
+    }
+  }
+
 
 GraphQL Schema Linter
 +++++++++++++++++++++

@@ -80,18 +80,19 @@ func (mw *loggingMiddleware) CreateTodo(ti model.CreateTodoInput, createdby stri
 	return
 }
 
-func (mw *loggingMiddleware) UpdateTodo(id string, ti model.UpdateTodoInput) (t *model.Todo, err error) {
+func (mw *loggingMiddleware) UpdateTodo(id string, ti model.UpdateTodoInput, updatedby string) (t *model.Todo, err error) {
 	defer func(begin time.Time) {
 		_ = mw.logger.Log(
 			"method", "UpdateTodo",
 			"input(id)", id,
 			"input(model.TodoInput)", fmt.Sprintf("%#v", ti),
+			"input(updatedby)", updatedby,
 			"output", fmt.Sprintf("%#v", t),
 			"err", err,
 			"took", time.Since(begin),
 		)
 	}(time.Now())
 
-	t, err = mw.next.UpdateTodo(id, ti)
+	t, err = mw.next.UpdateTodo(id, ti, updatedby)
 	return
 }

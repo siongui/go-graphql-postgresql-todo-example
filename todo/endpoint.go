@@ -38,6 +38,6 @@ func makeCreateTodoEndpoint(svc TodoService) endpoint.Endpoint {
 func makeUpdateTodoEndpoint(svc TodoService) endpoint.Endpoint {
 	return func(ctx context.Context, request interface{}) (interface{}, error) {
 		req := request.(graph.UpdateTodoRequest)
-		return svc.UpdateTodo(req.Id, req.T)
+		return svc.UpdateTodo(req.Id, req.T, req.UpdatedBy)
 	}
 }

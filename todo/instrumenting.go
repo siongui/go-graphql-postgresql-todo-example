@@ -70,13 +70,13 @@ func (mw *instrumentingMiddleware) CreateTodo(ti model.CreateTodoInput, createdb
 	return
 }
 
-func (mw *instrumentingMiddleware) UpdateTodo(id string, ti model.UpdateTodoInput) (t *model.Todo, err error) {
+func (mw *instrumentingMiddleware) UpdateTodo(id string, ti model.UpdateTodoInput, updatedby string) (t *model.Todo, err error) {
 	defer func(begin time.Time) {
 		lvs := []string{"method", "UpdateTodo", "error", fmt.Sprint(err != nil)}
 		mw.requestCount.With(lvs...).Add(1)
 		mw.requestLatency.With(lvs...).Observe(time.Since(begin).Seconds())
 	}(time.Now())
 
-	t, err = mw.next.UpdateTodo(id, ti)
+	t, err = mw.next.UpdateTodo(id, ti, updatedby)
 	return
 }
