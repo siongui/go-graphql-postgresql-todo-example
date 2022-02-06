@@ -6,7 +6,7 @@ import (
 
 	"github.com/99designs/gqlgen/graphql/handler"
 	"github.com/go-kit/kit/endpoint"
-	"github.com/go-kit/kit/log"
+	"github.com/go-kit/log"
 	"github.com/siongui/go-kit-gqlgen-postgres-todo-example/graph"
 	"github.com/siongui/go-kit-gqlgen-postgres-todo-example/graph/generated"
 )

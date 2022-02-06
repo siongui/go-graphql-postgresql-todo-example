@@ -8,8 +8,8 @@ import (
 	"github.com/siongui/go-kit-gqlgen-postgres-todo-example/todo"
 
 	"github.com/99designs/gqlgen/graphql/playground"
-	"github.com/go-kit/kit/log"
 	kitprometheus "github.com/go-kit/kit/metrics/prometheus"
+	"github.com/go-kit/log"
 	stdprometheus "github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 )

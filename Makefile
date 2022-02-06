@@ -36,6 +36,13 @@ gqlinit:
 schema_generate:
 	$(GQLGEN) generate --verbose
 
+golangci_lint:
+	golangci-lint run main.go
+	golangci-lint run ./config/...
+	golangci-lint run ./todo/...
+	golangci-lint run ./graph/...
+	golangci-lint run ./tools/migrate/...
+
 graphql_schema_lint:
 	npx graphql-schema-linter
 
@@ -45,11 +52,13 @@ database_migrations: fmt
 local_dev_get_metrics:
 	curl http://localhost:8080/metrics
 
-tododb_test:
-	go test -v -race todo/tododb/*.go
-
 modinit:
 	go mod init $(PKGNAME)
 
 modtidy:
 	go mod tidy -go=1.16 && go mod tidy -go=1.17
+
+install_golangci_lint:
+	@echo "\033[92mInstall golangci-lint ...\033[0m"
+	go install github.com/golangci/golangci-lint/cmd/golangci-lint@v1.44.0
+	golangci-lint --version

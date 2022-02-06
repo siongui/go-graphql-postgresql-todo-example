@@ -4,7 +4,7 @@ import (
 	"flag"
 	"os"
 
-	"github.com/go-kit/kit/log"
+	"github.com/go-kit/log"
 	"github.com/siongui/go-kit-gqlgen-postgres-todo-example/config"
 
 	"github.com/golang-migrate/migrate/v4"

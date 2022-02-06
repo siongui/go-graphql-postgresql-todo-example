@@ -30,6 +30,6 @@ func (t *DateTime) UnmarshalGQL(v interface{}) error {
 
 // MarshalGQL implements the graphql.Marshaler interface
 func (t DateTime) MarshalGQL(w io.Writer) {
-	w.Write([]byte(strconv.Quote(time.Time(t).Format(time.RFC3339))))
+	_, _ = w.Write([]byte(strconv.Quote(time.Time(t).Format(time.RFC3339))))
 	//w.Write([]byte(strconv.Quote(time.Time(t).UTC().Format(time.RFC3339))))
 }
