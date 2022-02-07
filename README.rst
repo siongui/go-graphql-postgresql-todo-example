@@ -414,6 +414,33 @@ The table name is *my_types*
   CREATE INDEX "idx_my_type_deleted_at" ON "my_types" ("deleted_at")
 
 
+Authentication and Permission
++++++++++++++++++++++++++++++
+
+Steps to implement:
+
+1. Get RSA Public key from http endpoint of identity provider.
+2. Use gin or chi to to get the token from header, and passed the token to
+   gqlgen resolver.
+3. Verify and extract user info and permissons from the token.
+
+
+- `Providing authentication details through context — gqlgen <https://gqlgen.com/recipes/authentication/>`_
+- `GitHub - ghiden/go-kit-stringsvc2-with-jwt: Go kit: stringsvc2 with JWT <https://github.com/ghiden/go-kit-stringsvc2-with-jwt>`_
+- `Go-kit微服务| JWT身份认证 <https://liu-yt.github.io/2019/06/23/Go-kit%E5%BE%AE%E6%9C%8D%E5%8A%A1-JWT%E8%BA%AB%E4%BB%BD%E8%AE%A4%E8%AF%81/>`_
+- `go-kit 微服务 身份认证 （JWT） | hwholiday <https://www.hwholiday.com/2020/go_kit_v3/>`_
+- `go-kit authentication - Google search <https://www.google.com/search?q=go-kit+authentication>`_
+- `go - How to propagate context values from Gin middleware to gqlgen resolvers? - Stack Overflow <https://stackoverflow.com/questions/67267065/how-to-propagate-context-values-from-gin-middleware-to-gqlgen-resolvers>`_
+- `Get HTTP headers in directives/mutations · Issue #262 · 99designs/gqlgen · GitHub <https://github.com/99designs/gqlgen/issues/262>`_
+- `laisky-blog: [Golang] 使用 gqlgen 编写 GraphQL 后端 <https://blog.laisky.com/p/gqlgen/>`_
+- `Using schema directives to implement permission checks — gqlgen <https://gqlgen.com/reference/directives/>`_
+- `gqlgen data validation · GitHub <https://gist.github.com/david-yappeter/3b9c1d68588dc3e1fb4a4a6efc086d07>`_
+- `Mapping GraphQL scalar types to Go types — gqlgen <https://gqlgen.com/reference/scalars/>`_
+- `使用 GraphQL Gateway 串接多個 Data Schema - 小惡魔 - AppleBOY <https://blog.wu-boy.com/2021/02/graphql-gateway-in-golang/>`_
+- `GraphQL with Golang: Building a GraphQL Server with GO and MySQL | by Vishal Jain | Towards Dev <https://towardsdev.com/graphql-with-golang-building-a-graphql-server-with-go-and-mysql-b931e8c3e3d3>`_
+- `golang jwt parse rsa from url - Google search <https://www.google.com/search?q=golang+jwt+parse+rsa+from+url>`_
+
+
 Code Structure
 ++++++++++++++
 
