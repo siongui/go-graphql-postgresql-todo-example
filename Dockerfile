@@ -26,6 +26,6 @@ RUN apk add build-base
 RUN make schema_generate
 RUN go build -o /todo_server
 
-EXPOSE 8080
+EXPOSE 3005
 
 CMD [ "/todo_server" ]

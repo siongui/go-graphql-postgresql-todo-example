@@ -50,7 +50,7 @@ database_migrations: fmt
 	go run tools/migrate/main.go -ssl=false -dir=$(MIGRATIONS_DIR)
 
 local_dev_get_metrics:
-	curl http://localhost:8080/metrics
+	curl http://localhost:3005/metrics
 
 modinit:
 	go mod init $(PKGNAME)
