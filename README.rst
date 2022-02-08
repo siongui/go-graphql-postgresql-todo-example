@@ -425,12 +425,14 @@ Steps to implement:
 3. Verify and extract user info and permissons from the token.
 
 
-- `Providing authentication details through context — gqlgen <https://gqlgen.com/recipes/authentication/>`_
+
+- | `go - How to propagate context values from Gin middleware to gqlgen resolvers? - Stack Overflow <https://stackoverflow.com/questions/67267065/how-to-propagate-context-values-from-gin-middleware-to-gqlgen-resolvers>`_
+  | `Providing authentication details through context — gqlgen <https://gqlgen.com/recipes/authentication/>`_
+
 - `GitHub - ghiden/go-kit-stringsvc2-with-jwt: Go kit: stringsvc2 with JWT <https://github.com/ghiden/go-kit-stringsvc2-with-jwt>`_
 - `Go-kit微服务| JWT身份认证 <https://liu-yt.github.io/2019/06/23/Go-kit%E5%BE%AE%E6%9C%8D%E5%8A%A1-JWT%E8%BA%AB%E4%BB%BD%E8%AE%A4%E8%AF%81/>`_
 - `go-kit 微服务 身份认证 （JWT） | hwholiday <https://www.hwholiday.com/2020/go_kit_v3/>`_
 - `go-kit authentication - Google search <https://www.google.com/search?q=go-kit+authentication>`_
-- `go - How to propagate context values from Gin middleware to gqlgen resolvers? - Stack Overflow <https://stackoverflow.com/questions/67267065/how-to-propagate-context-values-from-gin-middleware-to-gqlgen-resolvers>`_
 - `Get HTTP headers in directives/mutations · Issue #262 · 99designs/gqlgen · GitHub <https://github.com/99designs/gqlgen/issues/262>`_
 - `laisky-blog: [Golang] 使用 gqlgen 编写 GraphQL 后端 <https://blog.laisky.com/p/gqlgen/>`_
 - `Using schema directives to implement permission checks — gqlgen <https://gqlgen.com/reference/directives/>`_
@@ -498,6 +500,10 @@ References
 .. [9] | `golang migrate err no change - Google search <https://www.google.com/search?q=golang+migrate+err+no+change>`_
        | `go - golang-migrate no change error on initial migration - Stack Overflow <https://stackoverflow.com/questions/67910574/golang-migrate-no-change-error-on-initial-migration>`_
        | `Migrate.Up() errors out if the latest schema is in use · Issue #100 · golang-migrate/migrate · GitHub <https://github.com/golang-migrate/migrate/issues/100>`_
+.. [10] | `Using Gin to setup HTTP handlers — gqlgen <https://gqlgen.com/recipes/gin/>`_
+        | `How can i use gin with standard handlers? · Issue #57 · gin-gonic/gin · GitHub <https://github.com/gin-gonic/gin/issues/57>`_
+        | `Using http.Handler? · Issue #293 · gin-gonic/gin · GitHub <https://github.com/gin-gonic/gin/issues/293>`_
+
 
 .. _Go: https://golang.org/
 .. _Go kit: https://gokit.io/

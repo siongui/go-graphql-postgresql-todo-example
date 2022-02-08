@@ -1,13 +1,13 @@
 package main
 
 import (
-	"net/http"
 	"os"
 
 	"github.com/siongui/go-kit-gqlgen-postgres-todo-example/config"
 	"github.com/siongui/go-kit-gqlgen-postgres-todo-example/todo"
 
 	"github.com/99designs/gqlgen/graphql/playground"
+	"github.com/gin-gonic/gin"
 	kitprometheus "github.com/go-kit/kit/metrics/prometheus"
 	"github.com/go-kit/log"
 	stdprometheus "github.com/prometheus/client_golang/prometheus"
@@ -71,10 +71,11 @@ func main() {
 	svc = todo.NewLoggingMiddleware(logger, svc)
 	svc = todo.NewInstrumentingMiddleware(requestCount, requestLatency, svc)
 
-	http.Handle("/", playground.Handler("GraphQL playground", "/query"))
-	http.Handle("/query", todo.MakeGraphQLHandler(svc, logger))
-	http.Handle("/metrics", promhttp.Handler())
+	router := gin.New()
+	router.GET("/", gin.WrapH(playground.Handler("GraphQL playground", "/query")))
+	router.POST("/query", gin.WrapH(todo.MakeGraphQLHandler(svc, logger)))
+	router.GET("/metrics", gin.WrapH(promhttp.Handler()))
 
 	logger.Log("msg", "connect to http://localhost:"+config.Config.App.Port+"/ for GraphQL playground")
-	logger.Log("err", http.ListenAndServe(":"+config.Config.App.Port, nil))
+	logger.Log("err", router.Run(":"+config.Config.App.Port))
 }
