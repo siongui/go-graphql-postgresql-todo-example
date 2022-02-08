@@ -495,6 +495,9 @@ References
 .. [7] `jinzhu/configor: Golang Configuration tool that support YAML, JSON, TOML, Shell Environment <https://github.com/jinzhu/configor>`_
 .. [8] generating core failed: comment the ``autobind`` in https://gqlgen.com/config.
        See `generating core failed: unable to load example/graph/model in v0.16 <https://github.com/99designs/gqlgen/issues/1860>`_
+.. [9] | `golang migrate err no change - Google search <https://www.google.com/search?q=golang+migrate+err+no+change>`_
+       | `go - golang-migrate no change error on initial migration - Stack Overflow <https://stackoverflow.com/questions/67910574/golang-migrate-no-change-error-on-initial-migration>`_
+       | `Migrate.Up() errors out if the latest schema is in use · Issue #100 · golang-migrate/migrate · GitHub <https://github.com/golang-migrate/migrate/issues/100>`_
 
 .. _Go: https://golang.org/
 .. _Go kit: https://gokit.io/

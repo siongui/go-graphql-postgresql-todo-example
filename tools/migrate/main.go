@@ -50,7 +50,11 @@ func main() {
 		os.Exit(1)
 	}
 	if err = m.Up(); err != nil {
-		logger.Log("err", err.Error())
-		os.Exit(1)
+		if err == migrate.ErrNoChange {
+			logger.Log("msg", "no change")
+		} else {
+			logger.Log("err", err.Error())
+			os.Exit(1)
+		}
 	}
 }
