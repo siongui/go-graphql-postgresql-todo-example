@@ -30,14 +30,6 @@ func main() {
 	logger.Log("msg", "App config")
 	logger.Log("port", config.Config.App.Port)
 	logger.Log("timezone", config.Config.App.Timezone)
-	/*
-		logger.Log("msg", "Postgres DSN")
-		logger.Log("host", config.Config.Database.Postgres.Host)
-		logger.Log("port", config.Config.Database.Postgres.Port)
-		logger.Log("user", config.Config.Database.Postgres.User)
-		logger.Log("password", config.Config.Database.Postgres.Password)
-		logger.Log("dbname", config.Config.Database.Postgres.Dbname)
-	*/
 	gormdsn := "host=" + config.Config.Database.Postgres.Host +
 		" user=" + config.Config.Database.Postgres.User +
 		" password=" + config.Config.Database.Postgres.Password +
