@@ -26,6 +26,12 @@ RUN apk add build-base
 RUN make schema_generate
 RUN go build -o /todo_server
 
+# Build database migration command line tool
+COPY ./tools/migrate/iofs/ ./tools/migrate/iofs/
+COPY ./migrations/ ./tools/migrate/iofs/migrations/
+RUN cd ./tools/migrate/iofs/; go build -o /migrate
+#CMD [ "/migrate", "-ssl=false" ]
+
 EXPOSE 3005
 
 CMD [ "/todo_server" ]
