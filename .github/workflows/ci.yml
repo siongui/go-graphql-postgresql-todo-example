@@ -100,7 +100,7 @@ jobs:
         run: npx graphql-schema-linter
 
   golangci:
-    name: lint
+    name: golangci-lint
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
