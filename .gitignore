@@ -3,3 +3,4 @@ graph/model/*_gen.go
 tools/bin/
 tools/pkg/
 tools/src/
+tools/migrate/iofs/migrations/

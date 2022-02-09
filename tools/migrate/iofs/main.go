@@ -1,0 +1,70 @@
+//go:build go1.16
+// +build go1.16
+
+package main
+
+import (
+	"embed"
+	"flag"
+	"os"
+
+	"github.com/go-kit/log"
+	"github.com/siongui/go-kit-gqlgen-postgres-todo-example/config"
+
+	"github.com/golang-migrate/migrate/v4"
+	_ "github.com/golang-migrate/migrate/v4/database/postgres"
+	"github.com/golang-migrate/migrate/v4/source/iofs"
+)
+
+//go:embed migrations/*.sql
+var fs embed.FS
+
+func main() {
+	isSSL := flag.Bool("ssl", true, "is SSL mode?")
+	flag.Parse()
+
+	var logger log.Logger
+	{
+		logger = log.NewLogfmtLogger(os.Stderr)
+		logger = log.With(logger, "ts", log.DefaultTimestampUTC)
+		logger = log.With(logger, "caller", log.DefaultCaller)
+	}
+
+	// Load config
+	if err := config.LoadConfig(); err != nil {
+		logger.Log("err", err.Error())
+		os.Exit(1)
+	}
+
+	dsn := "postgres://" +
+		config.Config.Database.Postgres.User + ":" +
+		config.Config.Database.Postgres.Password + "@" +
+		config.Config.Database.Postgres.Host + ":" +
+		config.Config.Database.Postgres.Port + "/" +
+		config.Config.Database.Postgres.Dbname
+
+	if !*isSSL {
+		dsn += "?sslmode=disable"
+	}
+
+	logger.Log("DSN", dsn)
+
+	d, err := iofs.New(fs, "migrations")
+	if err != nil {
+		logger.Log("err", err.Error())
+		os.Exit(1)
+	}
+	m, err := migrate.NewWithSourceInstance("iofs", d, dsn)
+	if err != nil {
+		logger.Log("err", err.Error())
+		os.Exit(1)
+	}
+	if err = m.Up(); err != nil {
+		if err == migrate.ErrNoChange {
+			logger.Log("msg", "no change")
+		} else {
+			logger.Log("err", err.Error())
+			os.Exit(1)
+		}
+	}
+}
