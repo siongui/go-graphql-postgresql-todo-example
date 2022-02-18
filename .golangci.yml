@@ -1,5 +1,6 @@
 issues:
   exclude:
     - "Error return value of `logger.Log` is not checked"
+    - Error return value of `d.logger.Log` is not checked
     # pattern migrations/*.sql: no matching files found
     - 'pattern migrations/\*.sql: no matching files found'
