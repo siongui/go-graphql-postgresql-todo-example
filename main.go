@@ -6,8 +6,10 @@ import (
 
 	"github.com/siongui/go-kit-gqlgen-postgres-todo-example/config"
 	"github.com/siongui/go-kit-gqlgen-postgres-todo-example/graph"
+	"github.com/siongui/go-kit-gqlgen-postgres-todo-example/graph/generated"
 	"github.com/siongui/go-kit-gqlgen-postgres-todo-example/todo"
 
+	"github.com/99designs/gqlgen/graphql/handler"
 	"github.com/99designs/gqlgen/graphql/playground"
 	"github.com/gin-gonic/gin"
 	kitprometheus "github.com/go-kit/kit/metrics/prometheus"
@@ -73,11 +75,24 @@ func main() {
 	}
 	svc = todo.NewLoggingMiddleware(logger, svc)
 	svc = todo.NewInstrumentingMiddleware(requestCount, requestLatency, svc)
+	eps := todo.MakeEndPoints(svc, logger)
+
+	// Make GraphQL handler
+	gqlhdr := handler.NewDefaultServer(generated.NewExecutableSchema(generated.Config{
+		Resolvers: &graph.Resolver{
+			Logger:             logger,
+			GetTodoEndpoint:    eps.GetTodoEndpoint,
+			TodoPagesEndpoint:  eps.TodoPagesEndpoint,
+			TodoSearchEndpoint: eps.TodoSearchEndpoint,
+			CreateTodoEndpoint: eps.CreateTodoEndpoint,
+			UpdateTodoEndpoint: eps.UpdateTodoEndpoint,
+		},
+	}))
 
 	router := gin.New()
 	router.Use(GinContextToContextMiddleware())
 	router.GET("/", gin.WrapH(playground.Handler("GraphQL playground", "/query")))
-	router.POST("/query", gin.WrapH(todo.MakeGraphQLHandler(svc, logger)))
+	router.POST("/query", gin.WrapH(gqlhdr))
 	router.GET("/metrics", gin.WrapH(promhttp.Handler()))
 
 	logger.Log("msg", "connect to http://localhost:"+config.Config.App.Port+"/ for GraphQL playground")

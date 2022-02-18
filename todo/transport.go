@@ -2,14 +2,18 @@ package todo
 
 import (
 	"context"
-	"net/http"
 
-	"github.com/99designs/gqlgen/graphql/handler"
 	"github.com/go-kit/kit/endpoint"
 	"github.com/go-kit/log"
-	"github.com/siongui/go-kit-gqlgen-postgres-todo-example/graph"
-	"github.com/siongui/go-kit-gqlgen-postgres-todo-example/graph/generated"
 )
+
+type EndPoints struct {
+	GetTodoEndpoint    endpoint.Endpoint
+	TodoPagesEndpoint  endpoint.Endpoint
+	TodoSearchEndpoint endpoint.Endpoint
+	CreateTodoEndpoint endpoint.Endpoint
+	UpdateTodoEndpoint endpoint.Endpoint
+}
 
 func transportLoggingMiddleware(logger log.Logger) endpoint.Middleware {
 	return func(next endpoint.Endpoint) endpoint.Endpoint {
@@ -21,7 +25,7 @@ func transportLoggingMiddleware(logger log.Logger) endpoint.Middleware {
 	}
 }
 
-func MakeGraphQLHandler(svc TodoService, logger log.Logger) http.Handler {
+func MakeEndPoints(svc TodoService, logger log.Logger) EndPoints {
 	var getTodoEndpoint endpoint.Endpoint
 	getTodoEndpoint = makeGetTodoEndpoint(svc)
 	getTodoEndpoint = transportLoggingMiddleware(log.With(logger, "method", "getTodo"))(getTodoEndpoint)
@@ -42,14 +46,11 @@ func MakeGraphQLHandler(svc TodoService, logger log.Logger) http.Handler {
 	updateTodoEndpoint = makeUpdateTodoEndpoint(svc)
 	updateTodoEndpoint = transportLoggingMiddleware(log.With(logger, "method", "updateTodo"))(updateTodoEndpoint)
 
-	return handler.NewDefaultServer(generated.NewExecutableSchema(generated.Config{
-		Resolvers: &graph.Resolver{
-			Logger:             logger,
-			GetTodoEndpoint:    getTodoEndpoint,
-			TodoPagesEndpoint:  todoPagesEndpoint,
-			TodoSearchEndpoint: todoSearchEndpoint,
-			CreateTodoEndpoint: createTodoEndpoint,
-			UpdateTodoEndpoint: updateTodoEndpoint,
-		},
-	}))
+	return EndPoints{
+		GetTodoEndpoint:    getTodoEndpoint,
+		TodoPagesEndpoint:  todoPagesEndpoint,
+		TodoSearchEndpoint: todoSearchEndpoint,
+		CreateTodoEndpoint: createTodoEndpoint,
+		UpdateTodoEndpoint: updateTodoEndpoint,
+	}
 }
