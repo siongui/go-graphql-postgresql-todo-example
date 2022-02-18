@@ -424,8 +424,6 @@ Steps to implement:
    gqlgen resolver.
 3. Verify and extract user info and permissons from the token.
 
-
-
 - | `go - How to propagate context values from Gin middleware to gqlgen resolvers? - Stack Overflow <https://stackoverflow.com/questions/67267065/how-to-propagate-context-values-from-gin-middleware-to-gqlgen-resolvers>`_
   | `Providing authentication details through context — gqlgen <https://gqlgen.com/recipes/authentication/>`_
   | `Using Gin to setup HTTP handlers — gqlgen <https://gqlgen.com/recipes/gin/>`_

@@ -20,6 +20,7 @@ func GetCtxKey() interface{} {
 	return userCtxKey
 }
 
+// recover *gin.Context from context.Context
 func GinContextFromContext(ctx context.Context) (*gin.Context, error) {
 	ginContext := ctx.Value(userCtxKey)
 	if ginContext == nil {
