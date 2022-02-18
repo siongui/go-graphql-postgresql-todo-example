@@ -87,10 +87,7 @@ func main() {
 			CreateTodoEndpoint: eps.CreateTodoEndpoint,
 			UpdateTodoEndpoint: eps.UpdateTodoEndpoint,
 		},
-		Directives: generated.DirectiveRoot{
-			LogAuthorizationHeader: graph.LogAuthorizationHeader,
-			LogHeader:              graph.LogHeader,
-		},
+		Directives: graph.NewDirectives(logger),
 	}))
 
 	router := gin.New()
