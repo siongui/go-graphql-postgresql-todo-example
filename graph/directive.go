@@ -19,3 +19,16 @@ func LogAuthorizationHeader(ctx context.Context, obj interface{}, next graphql.R
 
 	return next(ctx)
 }
+
+func LogHeader(ctx context.Context, obj interface{}, next graphql.Resolver, header string) (res interface{}, err error) {
+	gc, err := GinContextFromContext(ctx)
+	if err != nil {
+		return
+	}
+
+	if len(gc.Request.Header[header]) > 0 {
+		log.Printf("%s: %s\n", header, gc.Request.Header[header][0])
+	}
+
+	return next(ctx)
+}

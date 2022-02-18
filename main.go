@@ -89,6 +89,7 @@ func main() {
 		},
 		Directives: generated.DirectiveRoot{
 			LogAuthorizationHeader: graph.LogAuthorizationHeader,
+			LogHeader:              graph.LogHeader,
 		},
 	}))
 
