@@ -5,7 +5,6 @@ import (
 	"fmt"
 
 	"github.com/gin-gonic/gin"
-	"github.com/go-kit/log"
 )
 
 // A private key for context that only this package can access.
@@ -34,15 +33,4 @@ func GinContextFromContext(ctx context.Context) (*gin.Context, error) {
 		return nil, err
 	}
 	return gc, nil
-}
-
-func logAuthorizationHeader(ctx context.Context, logger log.Logger) {
-	gc, err := GinContextFromContext(ctx)
-	if err != nil {
-		logger.Log("logAuthorizationHeader_err", err)
-	}
-
-	if len(gc.Request.Header["Authorization"]) > 0 {
-		logger.Log("Authorization", gc.Request.Header["Authorization"][0])
-	}
 }

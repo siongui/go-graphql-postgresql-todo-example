@@ -8,6 +8,9 @@ https://pkg.go.dev/time#pkg-constants
 """
 scalar DateTime
 
+"Log Authorization header in the request"
+directive @logAuthorizationHeader on FIELD_DEFINITION
+
 "TodoStatus represents the status of Todo item"
 enum TodoStatus {
     "status active"
@@ -88,13 +91,13 @@ type Query {
     getTodo(
         "id of the record"
         id: String!
-    ): Todo
+    ): Todo @logAuthorizationHeader
 
     "Offset based pagination of todo list"
     TodoPages(
         "pagination input"
         paginationInput: PaginationInput! = {count: 10, page: 1}
-    ): TodoPagination!
+    ): TodoPagination! @logAuthorizationHeader
 
     TodoSearch(
         "search filters"
@@ -102,7 +105,7 @@ type Query {
 
         "pagination input"
         paginationInput: PaginationInput! = {count: 10, page: 1}
-    ): TodoPagination!
+    ): TodoPagination! @logAuthorizationHeader
 }
 
 "Mutation request"
@@ -111,7 +114,7 @@ type Mutation {
     createTodo(
         "input for creating todo item"
         input: CreateTodoInput!
-    ): Todo
+    ): Todo @logAuthorizationHeader
 
     "Update existing todo"
     updateTodo(
@@ -120,5 +123,5 @@ type Mutation {
 
         "input for updating todo item"
         input: UpdateTodoInput!
-    ): Todo
+    ): Todo @logAuthorizationHeader
 }

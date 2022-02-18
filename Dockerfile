@@ -20,6 +20,7 @@ COPY ./graph/resolver.go ./graph/resolver.go
 COPY ./graph/schema.graphqls ./graph/schema.graphqls
 COPY ./graph/schema.resolvers.go ./graph/schema.resolvers.go
 COPY ./graph/helper.go ./graph/helper.go
+COPY ./graph/directive.go ./graph/directive.go
 COPY ./graph/scalar/ ./graph/scalar/
 COPY Makefile ./Makefile
 
