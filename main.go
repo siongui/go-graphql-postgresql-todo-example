@@ -1,9 +1,11 @@
 package main
 
 import (
+	"context"
 	"os"
 
 	"github.com/siongui/go-kit-gqlgen-postgres-todo-example/config"
+	"github.com/siongui/go-kit-gqlgen-postgres-todo-example/graph"
 	"github.com/siongui/go-kit-gqlgen-postgres-todo-example/todo"
 
 	"github.com/99designs/gqlgen/graphql/playground"
@@ -13,6 +15,15 @@ import (
 	stdprometheus "github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 )
+
+// set up middleware to pass *gin.Context to context.Context in resolver
+func GinContextToContextMiddleware() gin.HandlerFunc {
+	return func(c *gin.Context) {
+		ctx := context.WithValue(c.Request.Context(), graph.GetCtxKey(), c)
+		c.Request = c.Request.WithContext(ctx)
+		c.Next()
+	}
+}
 
 func main() {
 	var logger log.Logger
@@ -64,6 +75,7 @@ func main() {
 	svc = todo.NewInstrumentingMiddleware(requestCount, requestLatency, svc)
 
 	router := gin.New()
+	router.Use(GinContextToContextMiddleware())
 	router.GET("/", gin.WrapH(playground.Handler("GraphQL playground", "/query")))
 	router.POST("/query", gin.WrapH(todo.MakeGraphQLHandler(svc, logger)))
 	router.GET("/metrics", gin.WrapH(promhttp.Handler()))

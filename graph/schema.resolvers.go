@@ -11,6 +11,7 @@ import (
 )
 
 func (r *mutationResolver) CreateTodo(ctx context.Context, input model.CreateTodoInput) (*model.Todo, error) {
+	logAuthorizationHeader(ctx, r.Logger)
 	// TODO: createdby is email address of login user. use fixed value now.
 	createdby := "my@example.com"
 	t, err := r.CreateTodoEndpoint(ctx, CreateTodoRequest{T: input, CreatedBy: createdby})
@@ -18,6 +19,7 @@ func (r *mutationResolver) CreateTodo(ctx context.Context, input model.CreateTod
 }
 
 func (r *mutationResolver) UpdateTodo(ctx context.Context, id string, input model.UpdateTodoInput) (*model.Todo, error) {
+	logAuthorizationHeader(ctx, r.Logger)
 	// TODO: updatedby is email address of login user. use fixed value now.
 	updatedby := "updator@example.com"
 	t, err := r.UpdateTodoEndpoint(ctx, UpdateTodoRequest{Id: id, T: input, UpdatedBy: updatedby})
@@ -25,16 +27,19 @@ func (r *mutationResolver) UpdateTodo(ctx context.Context, id string, input mode
 }
 
 func (r *queryResolver) GetTodo(ctx context.Context, id string) (*model.Todo, error) {
+	logAuthorizationHeader(ctx, r.Logger)
 	t, err := r.GetTodoEndpoint(ctx, id)
 	return t.(*model.Todo), err
 }
 
 func (r *queryResolver) TodoPages(ctx context.Context, paginationInput model.PaginationInput) (*model.TodoPagination, error) {
+	logAuthorizationHeader(ctx, r.Logger)
 	t, err := r.TodoPagesEndpoint(ctx, paginationInput)
 	return t.(*model.TodoPagination), err
 }
 
 func (r *queryResolver) TodoSearch(ctx context.Context, input model.TodoSearchInput, paginationInput model.PaginationInput) (*model.TodoPagination, error) {
+	logAuthorizationHeader(ctx, r.Logger)
 	t, err := r.TodoSearchEndpoint(ctx, TodoSearchRequest{T: input, P: paginationInput})
 	return t.(*model.TodoPagination), err
 }

@@ -6,6 +6,7 @@ package graph
 
 import (
 	"github.com/go-kit/kit/endpoint"
+	"github.com/go-kit/log"
 	"github.com/siongui/go-kit-gqlgen-postgres-todo-example/graph/model"
 )
 
@@ -26,6 +27,7 @@ type UpdateTodoRequest struct {
 }
 
 type Resolver struct {
+	Logger             log.Logger
 	GetTodoEndpoint    endpoint.Endpoint
 	TodoPagesEndpoint  endpoint.Endpoint
 	TodoSearchEndpoint endpoint.Endpoint

@@ -28,6 +28,7 @@ fmt:
 	@go fmt todo/*.go
 	@go fmt todo/tododb/*.go
 	@go fmt tools/*.go
+	@go fmt tools/gqlclient/*.go
 	@go fmt tools/migrate/filesystem/*.go
 	@go fmt tools/migrate/iofs/*.go
 
@@ -43,6 +44,7 @@ golangci_lint:
 	golangci-lint run ./todo/...
 	golangci-lint run ./graph/...
 	golangci-lint run ./tools/migrate/...
+	golangci-lint run ./tools/gqlclient/...
 
 graphql_schema_lint:
 	npx graphql-schema-linter
@@ -59,6 +61,9 @@ database_migrations_iofs: fmt
 database_migrations: fmt
 	@echo "\033[92mMigration Source: filesystem ...\033[0m"
 	go run tools/migrate/filesystem/main.go -ssl=false -dir=$(MIGRATIONS_DIR)
+
+run_gqlclient:
+	go run tools/gqlclient/main.go
 
 local_dev_get_metrics:
 	curl http://localhost:3005/metrics

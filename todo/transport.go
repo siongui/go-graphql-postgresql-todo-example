@@ -44,6 +44,7 @@ func MakeGraphQLHandler(svc TodoService, logger log.Logger) http.Handler {
 
 	return handler.NewDefaultServer(generated.NewExecutableSchema(generated.Config{
 		Resolvers: &graph.Resolver{
+			Logger:             logger,
 			GetTodoEndpoint:    getTodoEndpoint,
 			TodoPagesEndpoint:  todoPagesEndpoint,
 			TodoSearchEndpoint: todoSearchEndpoint,

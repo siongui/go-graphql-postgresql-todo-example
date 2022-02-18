@@ -428,6 +428,7 @@ Steps to implement:
 
 - | `go - How to propagate context values from Gin middleware to gqlgen resolvers? - Stack Overflow <https://stackoverflow.com/questions/67267065/how-to-propagate-context-values-from-gin-middleware-to-gqlgen-resolvers>`_
   | `Providing authentication details through context — gqlgen <https://gqlgen.com/recipes/authentication/>`_
+  | `Using Gin to setup HTTP handlers — gqlgen <https://gqlgen.com/recipes/gin/>`_
 
 - `GitHub - ghiden/go-kit-stringsvc2-with-jwt: Go kit: stringsvc2 with JWT <https://github.com/ghiden/go-kit-stringsvc2-with-jwt>`_
 - `Go-kit微服务| JWT身份认证 <https://liu-yt.github.io/2019/06/23/Go-kit%E5%BE%AE%E6%9C%8D%E5%8A%A1-JWT%E8%BA%AB%E4%BB%BD%E8%AE%A4%E8%AF%81/>`_

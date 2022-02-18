@@ -9,6 +9,7 @@ require (
 	github.com/go-kit/log v0.2.0
 	github.com/golang-migrate/migrate/v4 v4.15.1
 	github.com/jinzhu/configor v1.2.1
+	github.com/machinebox/graphql v0.2.2
 	github.com/prometheus/client_golang v1.12.1
 	github.com/vektah/gqlparser/v2 v2.3.1
 	gorm.io/driver/postgres v1.2.3
@@ -45,12 +46,14 @@ require (
 	github.com/kr/text v0.2.0 // indirect
 	github.com/leodido/go-urn v1.2.0 // indirect
 	github.com/lib/pq v1.10.2 // indirect
+	github.com/matryer/is v1.4.0 // indirect
 	github.com/matryer/moq v0.2.3 // indirect
 	github.com/mattn/go-isatty v0.0.14 // indirect
 	github.com/matttproud/golang_protobuf_extensions v1.0.2-0.20181231171920-c182affec369 // indirect
 	github.com/mitchellh/mapstructure v1.4.2 // indirect
 	github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd // indirect
 	github.com/modern-go/reflect2 v1.0.2 // indirect
+	github.com/pkg/errors v0.9.1 // indirect
 	github.com/prometheus/client_model v0.2.0 // indirect
 	github.com/prometheus/common v0.32.1 // indirect
 	github.com/prometheus/procfs v0.7.3 // indirect
