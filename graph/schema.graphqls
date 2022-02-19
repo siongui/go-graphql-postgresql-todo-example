@@ -11,7 +11,7 @@ scalar DateTime
 "Log Authorization header in the request"
 directive @logAuthorizationHeader on FIELD_DEFINITION
 "Log header in the request"
-directive @logHeader(header: String!) on FIELD_DEFINITION
+directive @logHeader(header: String, removeBearerPrefix: Boolean) on FIELD_DEFINITION
 
 "TodoStatus represents the status of Todo item"
 enum TodoStatus {
@@ -99,7 +99,7 @@ type Query {
     TodoPages(
         "pagination input"
         paginationInput: PaginationInput! = {count: 10, page: 1}
-    ): TodoPagination! @logHeader(header: "Authorization")
+    ): TodoPagination! @logHeader(header: "Authorization", removeBearerPrefix: true)
 
     TodoSearch(
         "search filters"

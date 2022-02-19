@@ -2,6 +2,7 @@ package graph
 
 import (
 	"context"
+	"strings"
 
 	"github.com/siongui/go-kit-gqlgen-postgres-todo-example/graph/generated"
 
@@ -26,14 +27,23 @@ func (d *directive) logAuthorizationHeader(ctx context.Context, obj interface{},
 	return next(ctx)
 }
 
-func (d *directive) logHeader(ctx context.Context, obj interface{}, next graphql.Resolver, header string) (res interface{}, err error) {
+func (d *directive) logHeader(ctx context.Context, obj interface{}, next graphql.Resolver, header *string, removeBearerPrefix *bool) (res interface{}, err error) {
+	h := "Authorization"
+	if header != nil {
+		h = *header
+	}
+
 	gc, err := GinContextFromContext(ctx)
 	if err != nil {
 		return
 	}
 
-	if len(gc.Request.Header[header]) > 0 {
-		d.logger.Log(header, gc.Request.Header[header][0])
+	if len(gc.Request.Header[h]) > 0 {
+		value := gc.Request.Header[h][0]
+		if removeBearerPrefix != nil && *removeBearerPrefix == true {
+			value = strings.TrimPrefix(value, "Bearer ")
+		}
+		d.logger.Log(header, value)
 	}
 
 	return next(ctx)
