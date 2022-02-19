@@ -40,7 +40,7 @@ func (d *directive) logHeader(ctx context.Context, obj interface{}, next graphql
 
 	if len(gc.Request.Header[h]) > 0 {
 		value := gc.Request.Header[h][0]
-		if removeBearerPrefix != nil && *removeBearerPrefix == true {
+		if removeBearerPrefix != nil && *removeBearerPrefix {
 			value = strings.TrimPrefix(value, "Bearer ")
 		}
 		d.logger.Log(header, value)
